@@ -1,12 +1,15 @@
 package module_interface;
 
-import javax.swing.*;
 import java.awt.Container;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
-public class WindowShowLocalInfo
+public class WindowVaccinationInfo
 {
 	//Janela atual
 	private JFrame janela;
@@ -33,7 +36,7 @@ public class WindowShowLocalInfo
 	private int horizontalWindowOffsetValues = 165;
 	
 	//Offset vertical dos valores em relação à janela.
-	private int verticalWindowOffsetValues = 250;
+	private int verticalWindowOffsetValues = 285;
 	
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
@@ -41,20 +44,34 @@ public class WindowShowLocalInfo
 	//Tamanho da fonte do título principal.
 	private int sizeMainTitleFont = 50;
 	
+	//Tamanho da fonte do subtítulo principal.
+	private int sizeSubTitleFont = 22;
+	
 	//Tamanho da fonte dos valores apresentados na tela.
 	private int sizeValueFont = 20;
 	
 	//Tamanho da fonte do texto dos botões.
 	private int sizeButtonFont = 25;
 	
+	private String getDateTime() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date date = new Date();
+		return dateFormat.format(date);
+	}
 	
-	private void createMainTitleInScreen(String title)
+	private void createMainTitleInScreen(String dataAtualizacao)
 	{
-		JLabel labelTitulo = new JLabel(title);
+		JLabel labelTitulo = new JLabel("Informação Vacinação");
 		labelTitulo.setFont(new Font(font, Font.BOLD, sizeMainTitleFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelTitulo, 50, SpringLayout.NORTH, contentPane);
 		contentPane.add(labelTitulo);
+		
+		JLabel labelSubTitulo = new JLabel("Informações atualizadas em: " + dataAtualizacao);
+		labelSubTitulo.setFont(new Font(font, Font.BOLD, sizeSubTitleFont));
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelSubTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
+		layout.putConstraint(SpringLayout.NORTH, labelSubTitulo, 65, SpringLayout.NORTH, labelTitulo);
+		contentPane.add(labelSubTitulo);
 	}
 	
 	/*
@@ -76,9 +93,10 @@ public class WindowShowLocalInfo
 		contentPane.add(labelValue);
 	}
 	
-	public WindowShowLocalInfo(String userSearched)
+	public WindowVaccinationInfo()
 	{
-		janela = new JFrame("Informações de " + userSearched);
+		String dataAtualizacao = getDateTime();
+		this.janela = new JFrame("Informações da Vacinação (até " + dataAtualizacao + ")");
 		
 		janela.setSize(xSize, ySize);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,38 +106,31 @@ public class WindowShowLocalInfo
 		
 		
 		//TÍTULO DA JANELA
-		createMainTitleInScreen("Informações de " + userSearched);
+		createMainTitleInScreen(dataAtualizacao);
 		
-		
-		//MOSTRANDO OS VALORES!
-		//TODO Mudar para obter valores do registro local
-		
+	
 		//PRIMEIRA COLUNA
-		String titleName = "Nome: ";
-		String valueName = userSearched;
-		createInfoInScreen(titleName, valueName, 1, 1);
+		String titleFirstDose = "Nº de primeiras doses: ";
+		String valueFirstDose = "560"; //TODO colocar a partir do Web Scrapping!
+		createInfoInScreen(titleFirstDose, valueFirstDose, 1, 1);
 		
-		String titleCPF = "CPF: ";
-		String valueCPF = "465.859.478-19";
-		createInfoInScreen(titleCPF, valueCPF, 2, 1);
+		String titleAppliedDose = "Doses Aplicadas: ";
+		String valueAppliedDose = "1000"; //TODO colocar a partir do Web Scrapping!
+		createInfoInScreen(titleAppliedDose, valueAppliedDose, 2, 1);
 		
-		String titleMotherName = "Nome da mãe: ";
-		String valueMotherName = "Andréa Coisa Linda <3";
-		createInfoInScreen(titleMotherName, valueMotherName, 3, 1);
-		
-		String titleVaccinationDate = "Data da vacinação: ";
-		String valueVaccinationDate = "18/07/2021";
-		createInfoInScreen(titleVaccinationDate, valueVaccinationDate, 4, 1);
+		String titleSecondDose = "Nº de segundas doses: ";
+		String valueSecondDose = "6553"; //TODO colocar a partir do Web Scrapping!
+		createInfoInScreen(titleSecondDose, valueSecondDose, 3, 1);
 		
 		
 		//SEGUNDA COLUNA
-		String titleBirthDate = "Data de nascimento: ";
-		String valueBirthDate = "21/05/2001";
-		createInfoInScreen(titleBirthDate, valueBirthDate, 1, 2);
+		String titleOnlyDose = "Nº de doses únicas: ";
+		String valueOnlyDose = "2324"; //TODO colocar a partir do Web Scrapping!
+		createInfoInScreen(titleOnlyDose, valueOnlyDose, 1, 2);
 		
-		String titleVaccinationGroup = "Grupo de Atendimento: ";
-		String valueVaccinationGroup = "Novinho";
-		createInfoInScreen(titleVaccinationGroup, valueVaccinationGroup, 2, 2);
+		String titlePercentageVaccinated = "Porcentagem da população vacinada: ";
+		String valuePercentageVaccinated = "60%"; //TODO colocar a partir do Web Scrapping!
+		createInfoInScreen(titlePercentageVaccinated, valuePercentageVaccinated, 2, 2);
 		
 		
 		//BOTÕES
@@ -137,20 +148,6 @@ public class WindowShowLocalInfo
 		});
 		contentPane.add(buttonMainMenu);
 		
-		JButton buttonNewSearch = new JButton("Fazer nova consulta");
-		buttonNewSearch.setFont(new Font(font, Font.BOLD, sizeButtonFont));
-		layout.putConstraint(SpringLayout.EAST, buttonNewSearch, -50, SpringLayout.WEST, buttonMainMenu);
-		layout.putConstraint(SpringLayout.SOUTH, buttonNewSearch, 0, SpringLayout.SOUTH, buttonMainMenu);
-		buttonNewSearch.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		    	janela.setVisible(false);
-		    	janela.dispose();
-		    	//TODO abrir nova janela aqui!
-		    }
-		});
-		contentPane.add(buttonNewSearch);
-		
 		
 		contentPane.setLayout(layout);
 		janela.setVisible(true);
@@ -158,6 +155,6 @@ public class WindowShowLocalInfo
 	
 	public static void main(String[] args)
 	{
-		new WindowShowLocalInfo("Toschinho");
+		new WindowVaccinationInfo();
 	}
 }
