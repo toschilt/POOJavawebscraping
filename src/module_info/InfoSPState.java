@@ -25,7 +25,7 @@ public class InfoSPState extends Info {
 	public static void main(String args[]) {
 		try {
 			InfoSPState sp = new InfoSPState();
-			//System.out.println(sp.toString());
+			System.out.println(sp.toString());
 		}
 		catch(Exception e) {
 			e.printStackTrace();
