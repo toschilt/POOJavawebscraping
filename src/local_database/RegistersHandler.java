@@ -1,4 +1,4 @@
-package local_data;
+package local_database;
 
 import java.util.ArrayList;
 import module_exceptions.*;
@@ -9,8 +9,9 @@ public class RegistersHandler {
     private ArrayList<Register> registers;
     
     private static final String deathStatus = "Óbito";
-    private static final String caseStatus = "Óbito";
-    private static final String vaccinatedStatus = "Óbito";
+    private static final String caseStatus = "Contaminado";
+    private static final String vaccinatedStatus = "Vacinado";
+    //Adicionar opção de doses?
     
 
     public RegistersHandler() {

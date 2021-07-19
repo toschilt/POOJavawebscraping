@@ -1,4 +1,4 @@
-package local_data;
+package local_database;
 
 public class Main {
     
@@ -6,13 +6,12 @@ public class Main {
         
         RegistersHandler reg = new RegistersHandler();
 
-        /*  O que quer fazer?
-            - Buscar caso
-            - Registrar
-            - Atualizar informação
+        /*  
+			TODO Não permitir casos duplicados
+			Casos duplicados atualizam o database
         */
         
-        reg.registerNewCase(new String[] { "a", "b", "c", "d", "e", "f", "g" });
+        reg.registerNewCase(new String[] { "a", "b", "c", "d", "e", "j", "k" });
         reg.registerNewCase(new String[] { "asd", "asd", "asd", "sad", "asd", "sad", "asd" });
         
         String namer = new String();

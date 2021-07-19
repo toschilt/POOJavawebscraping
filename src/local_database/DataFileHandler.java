@@ -1,8 +1,6 @@
-package local_data;
+package local_database;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,8 +8,10 @@ import java.io.IOException;
 
 public class DataFileHandler {
 	
-	public static final String fileName = "localData.csv";
+	public static final String fileName = "LocalData.csv";
 	
+	
+	private DataFileHandler() {}
 	
 	public static ArrayList<Register> loadDataFromExternalFile() throws Exception {
     	

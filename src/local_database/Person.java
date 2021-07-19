@@ -1,4 +1,4 @@
-package local_data;
+package local_database;
 
 public class Person {
     
