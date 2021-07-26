@@ -2,12 +2,17 @@ package module_interface;
 
 import java.awt.Container;
 import javax.swing.*;
+
+import module_exceptions.WebScrappingException;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
+import module_info.InfoSPState;
 
 public class WindowVaccinationInfo
 {
@@ -52,6 +57,8 @@ public class WindowVaccinationInfo
 	
 	//Tamanho da fonte do texto dos botões.
 	private int sizeButtonFont = 25;
+	
+	private InfoSPState info;
 	
 	private String getDateTime() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -108,30 +115,40 @@ public class WindowVaccinationInfo
 		//TÍTULO DA JANELA
 		createMainTitleInScreen(dataAtualizacao);
 		
-	
-		//PRIMEIRA COLUNA
 		String titleFirstDose = "Nº de primeiras doses: ";
-		String valueFirstDose = "560"; //TODO colocar a partir do Web Scrapping!
-		createInfoInScreen(titleFirstDose, valueFirstDose, 1, 1);
-		
+		String valueFirstDose;
 		String titleAppliedDose = "Doses Aplicadas: ";
-		String valueAppliedDose = "1000"; //TODO colocar a partir do Web Scrapping!
-		createInfoInScreen(titleAppliedDose, valueAppliedDose, 2, 1);
-		
+		String valueAppliedDose;
 		String titleSecondDose = "Nº de segundas doses: ";
-		String valueSecondDose = "6553"; //TODO colocar a partir do Web Scrapping!
-		createInfoInScreen(titleSecondDose, valueSecondDose, 3, 1);
-		
-		
-		//SEGUNDA COLUNA
+		String valueSecondDose;
 		String titleOnlyDose = "Nº de doses únicas: ";
-		String valueOnlyDose = "2324"; //TODO colocar a partir do Web Scrapping!
-		createInfoInScreen(titleOnlyDose, valueOnlyDose, 1, 2);
-		
+		String valueOnlyDose;
 		String titlePercentageVaccinated = "Porcentagem da população vacinada: ";
-		String valuePercentageVaccinated = "60%"; //TODO colocar a partir do Web Scrapping!
-		createInfoInScreen(titlePercentageVaccinated, valuePercentageVaccinated, 2, 2);
+		String valuePercentageVaccinated;
+		String errorOccurred = "Nao foi possivel captar os dados";
 		
+		try {
+			info = new InfoSPState();
+			valueFirstDose = info.getFirstDoseApplied();
+			valueAppliedDose = info.getVaccineDosesApplied();
+			valueSecondDose = info.getSecondDoseApplied();
+			valueOnlyDose = info.getSingleDoseApplied();
+			valuePercentageVaccinated = info.getVaccinatedPercentage();
+		}
+		catch(WebScrappingException wse) {
+			valueFirstDose = errorOccurred;
+			valueAppliedDose = errorOccurred;
+			valueSecondDose = errorOccurred;
+			valueOnlyDose = errorOccurred;
+			valuePercentageVaccinated = errorOccurred;
+			System.out.println(wse.getMessage());
+		}
+
+		createInfoInScreen(titleAppliedDose, valueAppliedDose, 2, 1);
+		createInfoInScreen(titleFirstDose, valueFirstDose, 1, 1);
+		createInfoInScreen(titleSecondDose, valueSecondDose, 3, 1);
+		createInfoInScreen(titleOnlyDose, valueOnlyDose, 1, 2);
+		createInfoInScreen(titlePercentageVaccinated, valuePercentageVaccinated, 2, 2);
 		
 		//BOTÕES
 		JButton buttonMainMenu = new JButton("Voltar ao menu principal");
