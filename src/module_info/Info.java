@@ -3,38 +3,51 @@ package module_info;
 import java.util.List;
 
 public abstract class Info {
-	protected int confirmedCases, confirmedDeaths, vaccineDosesApplied, firstDoseApplied, secondDoseApplied, singleDoseApplied;
+	protected String confirmedCases, confirmedDeaths, vaccineDosesApplied, firstDoseApplied, secondDoseApplied, singleDoseApplied, totalVaccinatedPercentage;
 	protected List<String> vaccineCalendar;
 	
-	//TODO Info instantiation?
+	public abstract String getConfirmedCases();
 	
-	public int getConfirmedCases() {
-		return confirmedCases;
-	}
+	//public abstract void setConfirmedCases(String confirmedCases);
 	
-	public int getConfirmedDeaths() {
-		return confirmedDeaths;
-	}
+	public abstract String getConfirmedDeaths();
 	
-	public int getVaccineDosesApplied() {
-		return vaccineDosesApplied;
-	}
+	//public abstract void setConfirmedDeaths(String confirmedDeaths);
 	
-	public int getFirstDoseApplied() {
-		return firstDoseApplied;
-	}
+	public abstract String getVaccineDosesApplied();
 	
-	public int getSecondDoseApplied() {
-		return secondDoseApplied;
-	}
+	//public abstract void setVaccineDosesApplied(String vaccineDosesApplied);
 	
-	public int getSingleDoseApplied() {
-		return singleDoseApplied;
-	}
+	public abstract String getFirstDoseApplied();
 	
-	public List<String> getVaccineCalendar() {
-		return vaccineCalendar;
-	}
+	//public abstract void setFirstDoseApplied(String firstDoseApplied);
 	
-	//private static final String baseUrl = "https://www.saopaulo.sp.gov.br/coronavirus/";
+	public abstract String getSecondDoseApplied();
+	
+	//public abstract void setSecondDoseApplied(String secondDoseApplied);
+	
+	public abstract String getSingleDoseApplied();
+	
+	//public abstract void setSingleDoseApplied(String singleDoseApplied);
+	
+	public abstract String getVaccinatedPercentage();
+	
+	//public abstract void setVaccinatedPercentage(String vaccinatedPercentage);
+	
+	public abstract List<String> getVaccineCalendar();
+	
+	public abstract int getConfirmedCasesToInt();
+	
+	public abstract int getConfirmedDeathsToInt();
+	
+	public abstract int getVaccineDosesAppliedToInt();
+	
+	public abstract int getFirstDoseAppliedToInt();
+	
+	public abstract int getSecondDoseAppliedToInt();
+	
+	public abstract int getSingleDoseAppliedToInt();
+	
+	public abstract float getVaccinatedPercentageToFloat();
+		
 }

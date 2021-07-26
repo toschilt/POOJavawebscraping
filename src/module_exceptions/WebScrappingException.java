@@ -11,4 +11,8 @@ public class WebScrappingException extends Exception {
 	public WebScrappingException(String message) {
 		super(message);
 	}
+	
+	public WebScrappingException(String message, Throwable cause) {
+		super(message, cause);
+	}
 }
