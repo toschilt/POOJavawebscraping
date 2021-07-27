@@ -19,10 +19,10 @@ public class WindowVaccinationInfo
 	//Janela atual
 	private JFrame janela;
 	
-	//Layout da pï¿½gina
+	//Layout da página
 	private SpringLayout layout;
 	
-	//Componente da pï¿½gina (utilizando somente um para facilitar)
+	//Componente da página (utilizando somente um para facilitar)
 	private Container contentPane;
 	
 	//Tamanho horizontal da janela.
@@ -34,28 +34,28 @@ public class WindowVaccinationInfo
 	//Offset horizontal entre os valores da primeira e da segunda coluna.
 	private int horizontalDataOffsetValues = 500;
 	
-	//Offset vertical entre informaï¿½ï¿½es de uma linha para outra.
+	//Offset vertical entre informações de uma linha para outra.
 	private int vericalDataOffsetValues = 60;
 	
-	//Offset horizontal dos valores em relaï¿½ï¿½o ao lado esquerdo da janela.
+	//Offset horizontal dos valores em relação ao lado esquerdo da janela.
 	private int horizontalWindowOffsetValues = 165;
 	
-	//Offset vertical dos valores em relaï¿½ï¿½o ï¿½ janela.
+	//Offset vertical dos valores em relação ao topo da janela.
 	private int verticalWindowOffsetValues = 285;
 	
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
 	
-	//Tamanho da fonte do tï¿½tulo principal.
+	//Tamanho da fonte do título principal.
 	private int sizeMainTitleFont = 50;
 	
-	//Tamanho da fonte do subtï¿½tulo principal.
+	//Tamanho da fonte do subtítulo principal.
 	private int sizeSubTitleFont = 22;
 	
 	//Tamanho da fonte dos valores apresentados na tela.
 	private int sizeValueFont = 20;
 	
-	//Tamanho da fonte do texto dos botï¿½es.
+	//Tamanho da fonte do texto dos botões.
 	private int sizeButtonFont = 25;
 	
 	private InfoSPState info;
@@ -68,13 +68,13 @@ public class WindowVaccinationInfo
 	
 	private void createMainTitleInScreen(String dataAtualizacao)
 	{
-		JLabel labelTitulo = new JLabel("Informaï¿½ï¿½o Vacinaï¿½ï¿½o");
+		JLabel labelTitulo = new JLabel("Informações Vacinação");
 		labelTitulo.setFont(new Font(font, Font.BOLD, sizeMainTitleFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelTitulo, 50, SpringLayout.NORTH, contentPane);
 		contentPane.add(labelTitulo);
 		
-		JLabel labelSubTitulo = new JLabel("Informaï¿½ï¿½es atualizadas em: " + dataAtualizacao);
+		JLabel labelSubTitulo = new JLabel("Informações atualizadas em: " + dataAtualizacao);
 		labelSubTitulo.setFont(new Font(font, Font.BOLD, sizeSubTitleFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelSubTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelSubTitulo, 65, SpringLayout.NORTH, labelTitulo);
@@ -82,8 +82,8 @@ public class WindowVaccinationInfo
 	}
 	
 	/*
-	 * Cria na tela o tï¿½tulo da informaï¿½ï¿½o buscada e o seu correspondente valor
-	 * levando em consideraï¿½ï¿½o a linha e a coluna desejada.
+	 * Cria na tela o título da informação buscada e o seu correspondente valor
+	 * levando em consideração a linha e a coluna desejada.
 	 */
 	private void createInfoInScreen(String title, String value, int linha, int coluna)
 	{
@@ -103,7 +103,7 @@ public class WindowVaccinationInfo
 	public WindowVaccinationInfo()
 	{
 		String dataAtualizacao = getDateTime();
-		this.janela = new JFrame("Informaï¿½ï¿½es da Vacinaï¿½ï¿½o (atï¿½ " + dataAtualizacao + ")");
+		this.janela = new JFrame("Informações da Vacinação (em " + dataAtualizacao + ")");
 		
 		janela.setSize(xSize, ySize);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,15 +115,15 @@ public class WindowVaccinationInfo
 		//Tï¿½TULO DA JANELA
 		createMainTitleInScreen(dataAtualizacao);
 		
-		String titleFirstDose = "Nï¿½ de primeiras doses: ";
+		String titleFirstDose = "Nº de primeiras doses: ";
 		String valueFirstDose;
 		String titleAppliedDose = "Doses Aplicadas: ";
 		String valueAppliedDose;
-		String titleSecondDose = "Nï¿½ de segundas doses: ";
+		String titleSecondDose = "Nº de segundas doses: ";
 		String valueSecondDose;
-		String titleOnlyDose = "Nï¿½ de doses ï¿½nicas: ";
+		String titleOnlyDose = "Nº de doses únicas: ";
 		String valueOnlyDose;
-		String titlePercentageVaccinated = "Porcentagem da populaï¿½ï¿½o vacinada: ";
+		String titlePercentageVaccinated = "Porcentagem da população vacinada: ";
 		String valuePercentageVaccinated;
 		String errorOccurred = "Nao foi possivel captar os dados";
 		

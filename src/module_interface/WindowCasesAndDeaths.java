@@ -2,6 +2,10 @@ package module_interface;
 
 import java.awt.Container;
 import javax.swing.*;
+
+import module_exceptions.WebScrappingException;
+import module_info.InfoSPState;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,10 +18,10 @@ public class WindowCasesAndDeaths
 	//Janela atual
 	private JFrame janela;
 	
-	//Layout da pï¿½gina
+	//Layout da página
 	private SpringLayout layout;
 	
-	//Componente da pï¿½gina (utilizando somente um para facilitar)
+	//Componente da página (utilizando somente um para facilitar)
 	private Container contentPane;
 	
 	//Tamanho horizontal da janela.
@@ -29,31 +33,31 @@ public class WindowCasesAndDeaths
 	//Offset horizontal entre os valores da primeira e da segunda coluna.
 	private int horizontalDataOffsetValues = 500;
 	
-	//Offset vertical entre informaï¿½ï¿½es de uma linha para outra.
+	//Offset vertical entre informações de uma linha para outra.
 	private int vericalDataOffsetValues = 60;
 	
-	//Offset horizontal dos valores em relaï¿½ï¿½o ao lado esquerdo da janela.
+	//Offset horizontal dos valores em relação ao lado esquerdo da janela.
 	private int horizontalWindowOffsetValues = 150;
 	
-	//Offset vertical dos valores em relaï¿½ï¿½o ï¿½ janela.
+	//Offset vertical dos valores em relação ao topo da janela
 	private int verticalWindowOffsetValues = 330;
 	
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
 	
-	//Tamanho da fonte do tï¿½tulo principal.
+	//Tamanho da fonte do título principal.
 	private int sizeMainTitleFont = 50;
 	
-	//Tamanho da fonte do subtï¿½tulo principal.
+	//Tamanho da fonte do subtitulo principal.
 	private int sizeSubTitleFont = 22;
 	
 	//Tamanho da fonte dos valores apresentados na tela.
 	private int sizeValueFont = 20;
 	
-	//Tamanho da fonte do texto dos botï¿½es.
+	//Tamanho da fonte do texto dos botões.
 	private int sizeButtonFont = 25;
 
-	private InfoSPSate info;
+	private InfoSPState info;
 	
 	private String getDateTime() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -63,13 +67,13 @@ public class WindowCasesAndDeaths
 	
 	private void createMainTitleInScreen(String dataAtualizacao)
 	{
-		JLabel labelTitulo = new JLabel("Informaï¿½ï¿½es Casos e ï¿½bitos");
+		JLabel labelTitulo = new JLabel("Informações Casos e Óbitos");
 		labelTitulo.setFont(new Font(font, Font.BOLD, sizeMainTitleFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelTitulo, 50, SpringLayout.NORTH, contentPane);
 		contentPane.add(labelTitulo);
 		
-		JLabel labelSubTitulo = new JLabel("Informaï¿½ï¿½es atualizadas em: " + dataAtualizacao);
+		JLabel labelSubTitulo = new JLabel("Informações atualizadas em: " + dataAtualizacao);
 		labelSubTitulo.setFont(new Font(font, Font.BOLD, sizeSubTitleFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelSubTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelSubTitulo, 65, SpringLayout.NORTH, labelTitulo);
@@ -77,8 +81,8 @@ public class WindowCasesAndDeaths
 	}
 	
 	/*
-	 * Cria na tela o tï¿½tulo da informaï¿½ï¿½o buscada e o seu correspondente valor
-	 * levando em consideraï¿½ï¿½o a linha e a coluna desejada.
+	 * Cria na tela o título da informação buscada e o seu correspondente valor
+	 * levando em consideração a linha e a coluna desejada.
 	 */
 	private void createInfoInScreen(String title, String value, int linha, int coluna)
 	{
@@ -98,7 +102,7 @@ public class WindowCasesAndDeaths
 	public WindowCasesAndDeaths()
 	{
 		String dataAtualizacao = getDateTime();
-		this.janela = new JFrame("Informaï¿½ï¿½es da Vacinaï¿½ï¿½o (atï¿½ " + dataAtualizacao + ")");
+		this.janela = new JFrame("Informações da Vacinação (em " + dataAtualizacao + ")");
 		
 		janela.setSize(xSize, ySize);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,11 +120,11 @@ public class WindowCasesAndDeaths
 
 		String titleConfirmedCases = "Casos confirmados: ";
 		String valueConfirmedCases;
-		String titleDeaths = "ï¿½bitos: ";
+		String titleDeaths = "Óbitos: ";
 		String valueDeaths;
-		String titleIsolatingIndex = "ï¿½ndice de isolamento ";
+		String titleIsolatingIndex = "Índice de isolamento ";
 		String valueIsolatingIndex;
-		String titlePercentageVaccinated = "Porcentagem da populaï¿½ï¿½o vacinada: ";
+		String titlePercentageVaccinated = "Porcentagem da população vacinada: ";
 		String valuePercentageVaccinated;
 		String errorOccurred = "Nao foi possivel captar os dados";
 

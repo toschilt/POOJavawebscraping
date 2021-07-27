@@ -156,7 +156,7 @@ public class InfoSPState extends Info {
 	}
 
 	public String getIsolationPercentageState(){
-		return this.isolationPerecentageState;
+		return this.isolationPercentageState;
 	}
 
 	public String getIsolationPercentageCapitalState(){
