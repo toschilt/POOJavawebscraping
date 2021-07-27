@@ -111,6 +111,7 @@ public class RegistersHandler {
     	int registerIndex = userExists(updatedData[0], updatedData[1], true);
     	System.out.println(registerIndex + "");
     	
+    	//Busca pelo registro, atualiza informações da pessoa e do arquivo de dados
     	if(registerIndex != -1) {
     		Register registerToUpdate = registers.get(registerIndex);
     		registerToUpdate.update(updatedData);
@@ -122,6 +123,7 @@ public class RegistersHandler {
     }
     
     
+    //Coleta a quantidade de registros de um certo tipo
     public int getDeaths() {
     	int deaths = 0;
     	for(Register register : registers) {

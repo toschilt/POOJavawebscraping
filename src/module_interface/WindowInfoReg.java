@@ -120,17 +120,16 @@ public class WindowInfoReg  {
 		    	infos[5] = birthDate.getText();
 		    	infos[6] = motherName.getText();
 		    	
-		    	boolean algumCampoVazio = false;
-
+		    	boolean anyEmptyField = false;
 		    	for(int i = 0; i < infos.length; i++) {
 		    		if(infos[i].isEmpty())
 		    		{
-		    			algumCampoVazio = true;
+		    			anyEmptyField = true;
 		    		}
 		    	}
 		    	
 		    	
-		    	if(algumCampoVazio) {
+		    	if(anyEmptyField) {
 		    		new WindowError("Preencha todos os campos!");
 		    	}
 		    	else if(!infos[3].equals(RegistersHandler.deathStatus) && !infos[3].equals(RegistersHandler.caseStatus) &&

@@ -21,6 +21,7 @@ public class DataFileHandler {
 	
 	public static ArrayList<Register> loadDataFromExternalFile() throws Exception {
     	
+		//Carrega informações do arquivo CSV em memória
     	ArrayList<Register> registers = new ArrayList<Register>();
     	BufferedReader csvReader = new BufferedReader(new FileReader(fileName));
     	
@@ -37,7 +38,8 @@ public class DataFileHandler {
     
     public static void createDataFile() throws IOException {	
     	try {
-	    	FileWriter csvWriter = new FileWriter(fileName);
+    		//Cria o arquivo CSV
+    		FileWriter csvWriter = new FileWriter(fileName);
 	
 	    	csvWriter.append("FullName").append(SEPARATOR);
 	    	csvWriter.append("CPF").append(SEPARATOR);
@@ -56,6 +58,7 @@ public class DataFileHandler {
 
     public static void saveToExternalFile(String[] data) throws IOException {
 
+    	//Adiciona o novo registro no fim do arquvo CSV
     	FileWriter csvWriter = new FileWriter(fileName, true);
 
 	    csvWriter.append(String.join(SEPARATOR, data));
@@ -68,7 +71,9 @@ public class DataFileHandler {
     
     public static void updateDataInExternalFile(int row, String[] newData) throws IOException {
     	
-		String tempFile = "NewFile.txt";
+    	//Atualiza uma certa linha do CSV
+    	//Circula todas as linhas até encontrar o campo a ser atualizado
+		String tempFile = "dump.txt";
 		File oldFile = new File(fileName);
 		File newFile = new File(tempFile);
 		
