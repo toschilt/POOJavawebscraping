@@ -143,12 +143,17 @@ public class WindowInfoReg  {
 		    		
 		    		new WindowError("Insira um Tipo de Caso válido!", possibleOptions);
 		    	}
-		    	else if(!infos[2].equals("Masculino") && !infos[2].equals("Feminino")) {
-		    		String possibleOptions = "Masculino / Feminino";
+		    	
+		    	else if(!infos[2].equals(RegistersHandler.maleSex) && !infos[2].equals(RegistersHandler.femaleSex)) {
+		    		String possibleOptions = RegistersHandler.maleSex + " / " + RegistersHandler.femaleSex;
 		    		new WindowError("Insira um Sexo válido!", possibleOptions);
 		    	}
-		    	else if(!infos[2].equals("Prioritário") && !infos[2].equals("Médio") && !infos[2].equals("Baixo")) {
-		    		String possibleOptions = "Prioritário / Médio / Baixo";
+		    	
+		    	else if(!infos[2].equals(RegistersHandler.prioritaryGroup) && 
+		    			!infos[2].equals(RegistersHandler.mediumGroup) && !infos[2].equals(RegistersHandler.lastGroup)) {
+		    		
+		    		String possibleOptions = RegistersHandler.prioritaryGroup + " / " + 
+		    				RegistersHandler.mediumGroup + " / " + RegistersHandler.lastGroup;
 		    		new WindowError("Insira um Grupo de Atendimento válido!", possibleOptions);
 		    	}
 		    	
@@ -167,7 +172,7 @@ public class WindowInfoReg  {
 		    			new WindowError("Não é possível acessar as informações locais!");
 		    		}
 			    	catch(RegisterExistsException existExc) {
-		                Object[] options = {"Sim", "N�o", "Cancelar"};
+		                Object[] options = {"Sim", "Não", "Cancelar"};
 		                JOptionPane op = new JOptionPane();
 		                op.setSize(600, 300);
 		                int input = JOptionPane.showOptionDialog(null, "Atualizar Cadastro?", "Atenção!", JOptionPane.YES_NO_CANCEL_OPTION,

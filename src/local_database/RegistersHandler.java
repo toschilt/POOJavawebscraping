@@ -19,6 +19,14 @@ public class RegistersHandler {
     public static final String vaccinatedStatusSecondDose= "Vacinado 2D";
     public static final String vaccinatedStatusOnlyDose = "Vacinado Única";
     
+    public static final String prioritaryGroup = "Prioritário";
+    public static final String mediumGroup = "Médio";
+    public static final String lastGroup = "Baixo";
+    
+    public static final String maleSex = "Masculino";
+    public static final String femaleSex = "Feminino";
+    
+    
 
     //Construtor
     public RegistersHandler() throws CannotCreateDataFileException {
