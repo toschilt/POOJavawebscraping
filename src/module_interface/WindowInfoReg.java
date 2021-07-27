@@ -19,11 +19,11 @@ public class WindowInfoReg  {
     public WindowInfoReg() {
         
         // criando as variaveis
-    	this.janela = new JFrame("Cadastro de Informações");
+    	this.janela = new JFrame("Cadastro de InformaÃ§Ãµes");
 
         Container contentPane = janela.getContentPane();
         SpringLayout layout = new SpringLayout();
-        JLabel titulo = new JLabel("Cadastro de Informaações");
+        JLabel titulo = new JLabel("Cadastro de InformaÃ§Ãµes");
         
         JButton buttonReg = new JButton("Cadastrar");
         JButton buttonCancel = new JButton("Cancelar");
@@ -37,7 +37,7 @@ public class WindowInfoReg  {
         JLabel labelGender = new JLabel("Sexo");
         JTextField gender = new JTextField(20);
         
-        JLabel labelCPF = new JLabel("CPF");
+        JLabel labelCPF = new JLabel("CPF (Apenas nÃºmeros)");
         JTextField cpf = new JTextField(20);
         
         JLabel labelbirthDate = new JLabel("Data de Nascimento");
@@ -46,7 +46,7 @@ public class WindowInfoReg  {
         JLabel labelattGroup = new JLabel("Grupo de Atendimento");
         JTextField attGroup = new JTextField(20);
         
-        JLabel labelmotherName = new JLabel("Nome da Mãe");
+        JLabel labelmotherName = new JLabel("Nome da MÃ£e");
         JTextField motherName = new JTextField(40);
 
         // titulo
@@ -104,7 +104,7 @@ public class WindowInfoReg  {
         			reg = new RegistersHandler();
         		}
         		catch(Exception exc) {
-        			new WindowError("Não é possével acessar as informaçõees locais!");
+        			new WindowError("NÃ£o Ã© possÃ­vel acessar as informaÃ§Ãµes locais!");
         		}
 		    	
 		    	String[] infos = new String[7];
@@ -127,6 +127,8 @@ public class WindowInfoReg  {
 		    	if(anyEmptyField) {
 		    		new WindowError("Preencha todos os campos!");
 		    	}
+		    	
+		    	//VerificaÃ§Ã£o tipo de caso
 		    	else if(!infos[3].equals(RegistersHandler.deathStatus) && !infos[3].equals(RegistersHandler.caseStatus) &&
 		    			!infos[3].equals(RegistersHandler.vaccinatedStatusFirstDose) &&
 		    			!infos[3].equals(RegistersHandler.vaccinatedStatusSecondDose) && 
@@ -136,20 +138,32 @@ public class WindowInfoReg  {
 		    				" / " + RegistersHandler.vaccinatedStatusFirstDose + " / " + RegistersHandler.vaccinatedStatusSecondDose
 		    				+ " / " + RegistersHandler.vaccinatedStatusOnlyDose;
 		    		
-		    		new WindowError("Insira um Tipo de Caso válido!", possibleOptions);
+		    		new WindowError("Insira um Tipo de Caso vÃ¡lido!", possibleOptions);
 		    	}
 		    	
+		    	//VerificaÃ§Ã£o sexo
 		    	else if(!infos[2].equals(RegistersHandler.maleSex) && !infos[2].equals(RegistersHandler.femaleSex)) {
 		    		String possibleOptions = RegistersHandler.maleSex + " / " + RegistersHandler.femaleSex;
-		    		new WindowError("Insira um Sexo válido!", possibleOptions);
+		    		new WindowError("Insira um Sexo vÃ¡lido!", possibleOptions);
 		    	}
 		    	
+		    	//VerificaÃ§Ã£o grupo de atendimento
 		    	else if(!infos[4].equals(RegistersHandler.prioritaryGroup) && 
 		    			!infos[4].equals(RegistersHandler.mediumGroup) && !infos[2].equals(RegistersHandler.lastGroup)) {
 		    		
 		    		String possibleOptions = RegistersHandler.prioritaryGroup + " / " + 
 		    				RegistersHandler.mediumGroup + " / " + RegistersHandler.lastGroup;
-		    		new WindowError("Insira um Grupo de Atendimento válido!", possibleOptions);
+		    		new WindowError("Insira um Grupo de Atendimento vÃ¡lido!", possibleOptions);
+		    	}
+		    	
+		    	//VerificaÃ§Ã£o da data de nascimento
+		    	else if(!checkValidBirthDate(infos[5])) {
+		    		new WindowError("Insira uma data de nascimento vÃ¡lida!", "DD/MM/AAAA");
+		    	}
+		    	
+		    	//VerificaÃ§Ã£o do CPF
+		    	else if(!checkValidCPF(infos[1])) {
+		    		new WindowError("Insira um CPF vÃ¡lido!", "Este programa verifica se o CPF Ã© vÃ¡lido");
 		    	}
 		    	
 		    	else
@@ -164,10 +178,10 @@ public class WindowInfoReg  {
 			    	}
 		    		catch(IOException ioExc)
 		    		{
-		    			new WindowError("NÃo é possével acessar as informações locais!");
+		    			new WindowError("NÃ£o Ã© possÃ­vel acessar as informaÃ§Ãµes locais!");
 		    		}
 			    	catch(RegisterExistsException existExc) {
-		                Object[] options = {"Sim", "Não", "Cancelar"};
+		                Object[] options = {"Sim", "NÃ£o", "Cancelar"};
 		                JOptionPane op = new JOptionPane();
 		                op.setSize(600, 300);
 		                int input = JOptionPane.showOptionDialog(null, "Atualizar Cadastro?", "AtenÃ§Ã£o!", JOptionPane.YES_NO_CANCEL_OPTION,
@@ -238,36 +252,46 @@ public class WindowInfoReg  {
         janela.setVisible(true); 
     }  
     
-    private boolean checkValidCPF(String cpf) throws IOException {
-    	int length = cpf.length();
-    	if(length != 11)
-    		throw new IOException("CPF não é válido");
-    	try {
-    		int parse = Integer.parseInt(cpf);
-    	}
-    	catch(Exception e) {
-    		throw new IOException(e.getMessage());
-    	}
-    	int sumFirstDigit = 0, sumSecondDigit = 0;
-    	for(int i = length-3; i >= 0; i--) {
-    		sumFirstDigit += (Character.getNumericValue(cpf.charAt(i)) * (i+2));
-    	}
-    	for(int i = length-2; i >= 0; i--) {
-    		sumSecondDigit += (Character.getNumericValue(cpf.charAt(i)) * (i+2));
-    	}
-    	if(sumFirstDigit * 10 / 11 == cpf.charAt(9) && sumSecondDigit * 10 / 11 == cpf.charAt(10))
-    		return true;
-    	else
-    		throw new IOException("CPF não é válido");
+    
+    private static boolean checkValidCPF(String cpf) {
+        int length = cpf.length();
+        if(length != 11)
+        	return false;
+        try {
+            long parse = Long.parseLong(cpf);
+        }
+        catch(Exception e) {
+        	return false;
+        }
+        int sumFirstDigit = 0, sumSecondDigit = 0;
+        for(int i = 0, j = 10; i < length-2; i++, j--) {
+            sumFirstDigit += (Character.getNumericValue(cpf.charAt(i)) * j);
+        }
+        for(int i = 0, j = 11; i < length-1; i++, j--) {
+            sumSecondDigit += (Character.getNumericValue(cpf.charAt(i)) * j);
+        }
+        sumFirstDigit = (sumFirstDigit * 10) % 11; 
+        sumSecondDigit = (sumSecondDigit * 10) % 11;
+
+        if(sumFirstDigit == 10)
+            sumFirstDigit = 0;
+        if(sumSecondDigit == 10)
+            sumSecondDigit = 0;
+
+        if(sumFirstDigit == Character.getNumericValue(cpf.charAt(9)) && sumSecondDigit == Character.getNumericValue(cpf.charAt(10)))
+            return true;
+        else
+            return false;
     }
     
-    private boolean checkValidBirthDate(String date) throws IOException {
+    
+    private boolean checkValidBirthDate(String date) {
     	int count = 0;
     	for (int index = date.indexOf("/"); index >= 0; index = date.indexOf("/", index + 1)) {
     		count++;
     	}
-    	if(count != 3)
-    		throw new IOException("Data inválida");
+    	if(count != 2)
+    		return false;
     	int day, month, year;
     	try {
     		day = Character.getNumericValue(date.charAt(0)) * 10 + Character.getNumericValue(date.charAt(1));  
@@ -275,54 +299,55 @@ public class WindowInfoReg  {
     		year = Character.getNumericValue(date.charAt(6)) * 1000 + Character.getNumericValue(date.charAt(7)) * 100 + Character.getNumericValue(date.charAt(8)) * 10 + Character.getNumericValue(date.charAt(9));
     	}
     	catch(Exception e) {
-    		throw new IOException(e.getMessage());
+    		return false;
     	}
     	if(month < 1 || month > 12) {
-    		throw new IOException("Data inválida");
+    		return false;
     	}
     	if(day < 1)
-    		throw new IOException("Data inválida");
+    		return false;
     	
     	switch(month) {
     	case 1:
     		if(day > 31)
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	case 2:
     		if((year % 4 == 0 && day > 29) || (year % 4 != 0 && day > 28))
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	case 3:
     		if(day > 31)
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	case 5:
     		if(day > 31)
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	case 7:
     		if(day > 31)
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	case 8:
     		if(day > 31)
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	case 10:
     		if(day > 31)
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	case 12:
     		if(day > 31)
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	default:
     		if(day > 30)
-    			throw new IOException("Data inválida");
+    			return false;
     		break;
     	}
     	return true;
     }
+    
     
     public static void main(String[] args){
     	new WindowInfoReg();

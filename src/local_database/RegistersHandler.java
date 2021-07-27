@@ -15,6 +15,7 @@ public class RegistersHandler {
     //Defines para o nome de cada "status"
     public static final String deathStatus = "Óbito";
     public static final String caseStatus = "Contaminado";
+    
     public static final String vaccinatedStatusFirstDose = "Vacinado 1D";
     public static final String vaccinatedStatusSecondDose= "Vacinado 2D";
     public static final String vaccinatedStatusOnlyDose = "Vacinado Única";

@@ -131,6 +131,7 @@ public class WindowError {
 	
 	public static void main(String[] args)
 	{
-		new WindowError("MENSAGEM DE ERRO TESTE!", "errolkaslkalka");
+		new WindowError("MENSAGEM DE ERRO TESTE!");
+		new WindowError("MENSAGEM DE ERRO TESTE!", "Teste substring");
 	}
 }
