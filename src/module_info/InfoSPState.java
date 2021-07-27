@@ -266,7 +266,7 @@ public class InfoSPState extends Info {
 
 	public int getIsolationPercentagStateToInt() throws WebScrappingException {
 		try{
-			return Int.parseInt(this.isolationPercentageState);
+			return Integer.parseInt(this.isolationPercentageState);
 		}
 		catch(Exception e){
 			throw new WebScrappingException(e.getMessage());
@@ -275,7 +275,7 @@ public class InfoSPState extends Info {
 
 	public int getIsolationPercentageCapitalStateToInt() throws WebScrappingException {
 		try{
-			return Int.parseInt(this.isolationPercentageCapitalState);
+			return Integer.parseInt(this.isolationPercentageCapitalState);
 		}
 		catch(Exception e){
 			throw new WebScrappingException(e.getMessage());
