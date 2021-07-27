@@ -149,8 +149,8 @@ public class WindowInfoReg  {
 		    		new WindowError("Insira um Sexo válido!", possibleOptions);
 		    	}
 		    	
-		    	else if(!infos[2].equals(RegistersHandler.prioritaryGroup) && 
-		    			!infos[2].equals(RegistersHandler.mediumGroup) && !infos[2].equals(RegistersHandler.lastGroup)) {
+		    	else if(!infos[4].equals(RegistersHandler.prioritaryGroup) && 
+		    			!infos[4].equals(RegistersHandler.mediumGroup) && !infos[2].equals(RegistersHandler.lastGroup)) {
 		    		
 		    		String possibleOptions = RegistersHandler.prioritaryGroup + " / " + 
 		    				RegistersHandler.mediumGroup + " / " + RegistersHandler.lastGroup;
