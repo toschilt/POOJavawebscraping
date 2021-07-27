@@ -128,11 +128,11 @@ public class WindowInfoReg  {
 		    		}
 		    	}
 		    	
-		    	
 		    	if(algumCampoVazio)
 		    	{
 		    		new WindowError("Preencha todos os campos!");
 		    	}
+		    	
 		    	else
 		    	{
 		    		try {
@@ -176,6 +176,10 @@ public class WindowInfoReg  {
 		                }
 			    	}
 		    	}
+		    	
+		    
+		    	
+		    	
 		    }
 		});
         
@@ -214,6 +218,92 @@ public class WindowInfoReg  {
         contentPane.setLayout(layout);
         janela.setVisible(true); 
     }  
+    
+    private boolean checkValidCPF(String cpf) throws IOException {
+    	int length = cpf.length();
+    	if(length != 11)
+    		throw new IOException("CPF não é válido");
+    	try {
+    		int parse = Integer.parseInt(cpf);
+    	}
+    	catch(Exception e) {
+    		throw new IOException(e.getMessage());
+    	}
+    	int sumFirstDigit = 0, sumSecondDigit = 0;
+    	for(int i = length-3; i >= 0; i--) {
+    		sumFirstDigit += (Character.getNumericValue(cpf.charAt(i)) * (i+2));
+    	}
+    	for(int i = length-2; i >= 0; i--) {
+    		sumSecondDigit += (Character.getNumericValue(cpf.charAt(i)) * (i+2));
+    	}
+    	if(sumFirstDigit * 10 / 11 == cpf.charAt(9) && sumSecondDigit * 10 / 11 == cpf.charAt(10))
+    		return true;
+    	else
+    		throw new IOException("CPF não é válido");
+    }
+    
+    private boolean checkValidBirthDate(String date) throws IOException {
+    	int count = 0;
+    	for (int index = date.indexOf("/"); index >= 0; index = date.indexOf("/", index + 1)) {
+    		count++;
+    	}
+    	if(count != 3)
+    		throw new IOException("Data inválida");
+    	int day, month, year;
+    	try {
+    		day = Character.getNumericValue(date.charAt(0)) * 10 + Character.getNumericValue(date.charAt(1));  
+    		month = Character.getNumericValue(date.charAt(3)) * 10 + Character.getNumericValue(date.charAt(4));
+    		year = Character.getNumericValue(date.charAt(6)) * 1000 + Character.getNumericValue(date.charAt(7)) * 100 + Character.getNumericValue(date.charAt(8)) * 10 + Character.getNumericValue(date.charAt(9));
+    	}
+    	catch(Exception e) {
+    		throw new IOException(e.getMessage());
+    	}
+    	if(month < 1 || month > 12) {
+    		throw new IOException("Data inválida");
+    	}
+    	if(day < 1)
+    		throw new IOException("Data inválida");
+    	
+    	switch(month) {
+    	case 1:
+    		if(day > 31)
+    			throw new IOException("Data inválida");
+    		break;
+    	case 2:
+    		if((year % 4 == 0 && day > 29) || (year % 4 != 0 && day > 28))
+    			throw new IOException("Data inválida");
+    		break;
+    	case 3:
+    		if(day > 31)
+    			throw new IOException("Data inválida");
+    		break;
+    	case 5:
+    		if(day > 31)
+    			throw new IOException("Data inválida");
+    		break;
+    	case 7:
+    		if(day > 31)
+    			throw new IOException("Data inválida");
+    		break;
+    	case 8:
+    		if(day > 31)
+    			throw new IOException("Data inválida");
+    		break;
+    	case 10:
+    		if(day > 31)
+    			throw new IOException("Data inválida");
+    		break;
+    	case 12:
+    		if(day > 31)
+    			throw new IOException("Data inválida");
+    		break;
+    	default:
+    		if(day > 30)
+    			throw new IOException("Data inválida");
+    		break;
+    	}
+    	return true;
+    }
     
     public static void main(String[] args){
     	new WindowInfoReg();
