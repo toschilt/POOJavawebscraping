@@ -1,5 +1,6 @@
 package local_database;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import module_exceptions.*;
 
@@ -14,7 +15,7 @@ public class RegistersHandler {
     //Adicionar opção de doses?
     
 
-    public RegistersHandler() {
+    public RegistersHandler() throws CannotCreateDataFileException {
     	//Inicialização do arquivo
     	try { registers = DataFileHandler.loadDataFromExternalFile(); }
 	    catch(Exception e) {
@@ -23,34 +24,59 @@ public class RegistersHandler {
 	    	
 	    	try { DataFileHandler.createDataFile(); }
 	    	catch(Exception q) { //Não foi possível criar arquivo de dados
-	    		//Envia uma excessão que encerra o programa
+	    		throw new CannotCreateDataFileException("Unable to create data file");
 			}
 		}
     }
 
-
-    public void registerNewCase(String[] data) {
-    	
-        Register newRegister = new Register(data);
-        registers.add(newRegister);
-        
-        try { DataFileHandler.saveToExternalFile(data); }
-        
-        //Adicionar excessão para problema com arquivo de dados
-        catch(Exception e) { return; }
-    }
-
-
-    public String searchForCase(String identifier) throws PersonNotFoundException {
-        
-        for(Register register : registers) {
+    
+    private Register userExists(String identifier) {
+    	for(Register register : registers) {
         	String nextName = register.getPersonalData().getFullName();
         	String nextCPF = register.getPersonalData().getCPF();
             
         	if(identifier.equals(nextName) || identifier.equals(nextCPF)) {
-                return register.getPersonalData().toString();
+                return register;
             }
-        }
+    	}
+    	return null;
+    }
+    
+    private boolean userExists(String name, String cpf) {
+    	
+    	for(Register register : registers) {
+        	String nextName = register.getPersonalData().getFullName();
+        	String nextCPF = register.getPersonalData().getCPF();
+            
+        	if(name.equals(nextName) || cpf.equals(nextCPF)) {
+                return true;
+            }
+    	}
+    	
+    	return false;
+    }
+    
+
+    public void registerNewCase(String[] data) throws RegisterExistsException, IOException {
+    	
+    	if(userExists(data[0], data[1])) {
+    		throw new RegisterExistsException("Cadastro já existente");
+    	}
+    	
+        Register newRegister = new Register(data);
+        registers.add(newRegister);
+        
+        DataFileHandler.saveToExternalFile(data);
+        
+    }
+
+
+    public String[] searchForCase(String identifier) throws PersonNotFoundException {
+        
+    	Register register = userExists(identifier);
+    	if(register != null) {
+    		return register.getPersonalData().getFullData();
+    	}
         
         throw new PersonNotFoundException("Pessoa não encontrada");
     }
@@ -69,6 +95,7 @@ public class RegistersHandler {
         
         throw new PersonNotFoundException("Pessoa não encontrada");
     }
+    
     
     
     public int getDeaths() {
