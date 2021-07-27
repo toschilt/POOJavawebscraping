@@ -8,7 +8,10 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+import com.opencsv.exceptions.CsvException;
+
 import local_database.RegistersHandler;
+import module_exceptions.PersonNotFoundException;
 import module_exceptions.RegisterExistsException;
 
 public class WindowInfoReg  {
@@ -151,7 +154,11 @@ public class WindowInfoReg  {
 		                            JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		                switch (input) {
 		                    case JOptionPane.OK_OPTION:
-		                        System.out.println("OK!!!!");
+								try {
+									reg.updateInformation(infos);
+								} catch (Exception InfoExc) {
+									new WindowError("Não é possível acessar as informações locais!");
+								}                	
 		                        break;
 		                    case JOptionPane.CANCEL_OPTION:
 		                        op.setVisible(false);

@@ -20,14 +20,14 @@ public class RegistersHandler {
 
     //Construtor
     public RegistersHandler() throws CannotCreateDataFileException {
-    	//Inicializa√ß√£o do arquivo
+    	//InicializaÁ„o do arquivo
     	try { registers = DataFileHandler.loadDataFromExternalFile(); }
 	    catch(Exception e) {
 	    	//Arquivo de dados n√£o existe
 	    	registers = new ArrayList<Register>();
 	    	
 	    	try { DataFileHandler.createDataFile(); }
-	    	catch(Exception q) { //N√£o foi poss√≠vel criar arquivo de dados
+	    	catch(Exception q) { //N„o foi possÌvel criar arquivo de dados
 	    		throw new CannotCreateDataFileException("Unable to create data file");
 			}
 		}
@@ -111,7 +111,7 @@ public class RegistersHandler {
     	if(registerIndex != -1) {
     		Register registerToUpdate = registers.get(registerIndex);
     		registerToUpdate.update(updatedData);
-    		DataFileHandler.updateDataInExternalFile(registerIndex, updatedData);
+    		DataFileHandler.updateDataInExternalFile(registerIndex + 2, updatedData);
     	}
         
         throw new PersonNotFoundException("Pessoa n√£o encontrada");

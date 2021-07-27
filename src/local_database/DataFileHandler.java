@@ -7,8 +7,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 
-import net.sourceforge.htmlunit.corejs.javascript.ast.ForInLoop;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
