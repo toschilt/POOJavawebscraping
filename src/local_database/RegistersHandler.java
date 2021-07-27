@@ -1,5 +1,6 @@
 package local_database;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import module_exceptions.*;
 
@@ -29,15 +30,12 @@ public class RegistersHandler {
     }
 
 
-    public void registerNewCase(String[] data) {
+    public void registerNewCase(String[] data) throws IOException {
     	
         Register newRegister = new Register(data);
         registers.add(newRegister);
         
-        try { DataFileHandler.saveToExternalFile(data); }
-        
-        //Adicionar excessão para problema com arquivo de dados
-        catch(Exception e) { return; }
+        DataFileHandler.saveToExternalFile(data);
     }
 
 
