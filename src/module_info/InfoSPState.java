@@ -13,7 +13,7 @@ public class InfoSPState extends Info {
 	private static final String SITEVACCINES = "https://vacinaja.sp.gov.br/";
 	private static final String SITEDATA = "https://www.saopaulo.sp.gov.br/coronavirus/";
 	
-	protected String adultsWithFirstDosePercentage, totalPopulationWithFirstDosePercentage, totalInvested;
+	protected String adultsWithFirstDosePercentage, totalPopulationWithFirstDosePercentage, totalInvested, isolationPercentageState, isolationPercentageCapitalState;
 
 	private static final String XPATHVACCINES[] = {
 			"/html/body/section[3]/div/div/div[2]/div[1]/div/div",
@@ -30,6 +30,8 @@ public class InfoSPState extends Info {
 			"/html/body/section[5]/div/div/div[1]/div[2]/div[2]/p[2]",
 			"/html/body/section[5]/div/div/div[3]/div[2]/div/p[2]",
 			"/html/body/section[5]/div/div/div[3]/div[2]/div/p[3]",
+			"/html/body/section[5]/div/div/div[2]/div[2]/div[1]/p[2]",
+			"/html/body/section[5]/div/div/div[2]/div[2]/div[2]/p[2]",
 	};
 	
 	private static final String XPATHCALENDAR[] = {
@@ -66,8 +68,9 @@ public class InfoSPState extends Info {
 			this.confirmedCases = convertHtmlElementToString(listInfoData.remove(0));
 			this.confirmedDeaths = convertHtmlElementToString(listInfoData.remove(0));
 			this.totalInvested = convertHtmlElementToString(listInfoData.remove(0)) + " " + convertHtmlElementToString(listInfoData.remove(0));
-			
-			// TODO - someday (maybe never) I will update this piece of code
+			this.isolationPercentageState = convertHtmlElementToString(listInfoData.remove(0));
+			this.isolationPercentageCapitalState = convertHtmlElementToString(listInfoData.remove(0));
+
 			this.vaccineCalendar = new ArrayList<String>();
 			for(HtmlElement element : listInfoCalendar) {
 				this.vaccineCalendar.add(convertHtmlElementToString(element));
@@ -152,44 +155,87 @@ public class InfoSPState extends Info {
 		return this.totalVaccinatedPercentage;
 	}
 
+	public String getIsolationPercentageState(){
+		return this.isolationPerecentageState;
+	}
+
+	public String getIsolationPercentageCapitalState(){
+		return this.isolationPercentageCapitalState;
+	}
+
 	@Override
 	public List<String> getVaccineCalendar() {
 		return this.vaccineCalendar;
 	}
 
 	@Override
-	public int getConfirmedCasesToInt() {
-		return Integer.parseInt(this.confirmedCases.replace(".", ""));
+	public int getConfirmedCasesToInt() throws WebScrappingException {
+		try{
+			return Integer.parseInt(this.confirmedCases.replace(".", ""));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 
 	@Override
-	public int getConfirmedDeathsToInt() {
-		return Integer.parseInt(this.confirmedDeaths.replace(".", ""));
+	public int getConfirmedDeathsToInt() throws WebScrappingException {
+		try{
+			return Integer.parseInt(this.confirmedDeaths.replace(".", ""));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 
 	@Override
-	public int getVaccineDosesAppliedToInt() {
-		return Integer.parseInt(this.vaccineDosesApplied.replace(".", ""));
+	public int getVaccineDosesAppliedToInt() throws WebScrappingException {
+		try{
+			return Integer.parseInt(this.vaccineDosesApplied.replace(".", ""));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 
 	@Override
-	public int getFirstDoseAppliedToInt() {
-		return Integer.parseInt(this.firstDoseApplied.replace(".", ""));
+	public int getFirstDoseAppliedToInt() throws WebScrappingException {
+		try{
+			return Integer.parseInt(this.firstDoseApplied.replace(".", ""));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 
 	@Override
-	public int getSecondDoseAppliedToInt() {
-		return Integer.parseInt(this.secondDoseApplied.replace(".", ""));
+	public int getSecondDoseAppliedToInt() throws WebScrappingException {
+		try{
+			return Integer.parseInt(this.secondDoseApplied.replace(".", ""));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 
 	@Override
-	public int getSingleDoseAppliedToInt() {
-		return Integer.parseInt(this.singleDoseApplied.replace(".", ""));
+	public int getSingleDoseAppliedToInt() throws WebScrappingException {
+		try{
+			return Integer.parseInt(this.singleDoseApplied.replace(".", ""));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 
 	@Override
-	public float getVaccinatedPercentageToFloat() {
-		return Float.parseFloat(this.totalVaccinatedPercentage.replace(",", "."));
+	public float getVaccinatedPercentageToFloat() throws WebScrappingException {
+		try{
+			return Float.parseFloat(this.totalVaccinatedPercentage.replace(",", "."));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 	
 	public String getAdultsWithFirstDosePercentage() {
@@ -200,11 +246,39 @@ public class InfoSPState extends Info {
 		return totalPopulationWithFirstDosePercentage;
 	}
 
-	public float getAdultsWithFirstDosePercentageToFloat() {
-		return Float.parseFloat(adultsWithFirstDosePercentage.replace(",", "."));
+	public float getAdultsWithFirstDosePercentageToFloat() throws WebScrappingException {
+		try{
+			return Float.parseFloat(adultsWithFirstDosePercentage.replace(",", "."));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 	
-	public float getTotalPopulationWithFirstDosePercentageToFloat() {
-		return Float.parseFloat(totalPopulationWithFirstDosePercentage.replace(",", "."));
+	public float getTotalPopulationWithFirstDosePercentageToFloat() throws WebScrappingException {
+		try{
+			return Float.parseFloat(totalPopulationWithFirstDosePercentage.replace(",", "."));
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
+	}
+
+	public int getIsolationPercentagStateToInt() throws WebScrappingException {
+		try{
+			return Int.parseInt(this.isolationPercentageState);
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
+	}
+
+	public int getIsolationPercentageCapitalStateToInt() throws WebScrappingException {
+		try{
+			return Int.parseInt(this.isolationPercentageCapitalState);
+		}
+		catch(Exception e){
+			throw new WebScrappingException(e.getMessage());
+		}
 	}
 }
