@@ -13,21 +13,23 @@ public class RegistersHandler {
     private ArrayList<Register> registers;
     
     //Defines para o nome de cada "status"
-    private static final String deathStatus = "Ã“bito";
-    private static final String caseStatus = "Contaminado";
-    private static final String vaccinatedStatus = "Vacinado";
+    public static final String deathStatus = "Ã“bito";
+    public static final String caseStatus = "Contaminado";
+    public static final String vaccinatedStatusFirstDose = "Vacinado 1D";
+    public static final String vaccinatedStatusSecondDose= "Vacinado 2D";
+    public static final String vaccinatedStatusOnlyDose = "Vacinado Ãšnica";
     
 
     //Construtor
     public RegistersHandler() throws CannotCreateDataFileException {
-    	//Inicialização do arquivo
+    	//Inicializaï¿½ï¿½o do arquivo
     	try { registers = DataFileHandler.loadDataFromExternalFile(); }
 	    catch(Exception e) {
 	    	//Arquivo de dados nÃ£o existe
 	    	registers = new ArrayList<Register>();
 	    	
 	    	try { DataFileHandler.createDataFile(); }
-	    	catch(Exception q) { //Não foi possível criar arquivo de dados
+	    	catch(Exception q) { //Nï¿½o foi possï¿½vel criar arquivo de dados
 	    		throw new CannotCreateDataFileException("Unable to create data file");
 			}
 		}
@@ -141,7 +143,11 @@ public class RegistersHandler {
     public int getVaccinated() {
     	int vaccinated = 0;
     	for(Register register : registers) {
-    		if(register.getPersonalData().getStatus().equals(vaccinatedStatus)) { vaccinated++; }
+    		if(register.getPersonalData().getStatus().equals(vaccinatedStatusFirstDose) ||
+    				register.getPersonalData().getStatus().equals(vaccinatedStatusSecondDose) ||
+    				register.getPersonalData().getStatus().equals(vaccinatedStatusOnlyDose)) {
+    			vaccinated++; 
+    		}
     	}
     	return vaccinated;
     }

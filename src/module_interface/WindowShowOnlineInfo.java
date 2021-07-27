@@ -15,16 +15,16 @@ public class WindowShowOnlineInfo  {
     public WindowShowOnlineInfo() {
         
         // criando as variaveis
-    	janela = new JFrame("Visualização de Informações On-Line");
+    	janela = new JFrame("VisualizaÃ§Ã£o de InformaÃ§Ãµes On-Line");
     	janela.setSize(1200, 700);
     	
         Container contentPane = janela.getContentPane();
         SpringLayout layout = new SpringLayout();
         
-        JLabel titulo = new JLabel("Visualização de Informações On-Line");
-        JLabel subTitulo = new JLabel("Estado de São Paulo - Brasil");
+        JLabel titulo = new JLabel("VisualizaÃ§Ã£o de InformaÃ§Ãµes On-Line");
+        JLabel subTitulo = new JLabel("Estado de SÃ£o Paulo - Brasil");
         
-        JButton buttonVac = new JButton("Vacinação");
+        JButton buttonVac = new JButton("VacinaÃ§Ã£o");
         buttonVac.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
@@ -34,7 +34,7 @@ public class WindowShowOnlineInfo  {
 		    }
 		});
         
-        JButton buttonCases = new JButton("Casos e Óbitos");
+        JButton buttonCases = new JButton("Casos e Ã“bitos");
         buttonCases.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
@@ -67,7 +67,7 @@ public class WindowShowOnlineInfo  {
 		contentPane.add(subTitulo);
 		
         
-        // botões
+        // botï¿½es
         buttonVac.setFont(new Font("Arial", Font.BOLD, 25));
         buttonCases.setFont(new Font("Arial", Font.BOLD, 25));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonVac, -200, SpringLayout.HORIZONTAL_CENTER, contentPane);

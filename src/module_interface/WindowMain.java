@@ -11,10 +11,10 @@ public class WindowMain
 	//Janela atual
 	private JFrame janela;
 	
-	//Layout da página
+	//Layout da pï¿½gina
 	private SpringLayout layout;
 	
-	//Componente da página (utilizando somente um para facilitar)
+	//Componente da pï¿½gina (utilizando somente um para facilitar)
 	private Container contentPane;
 	
 	//Tamanho horizontal da janela.
@@ -23,23 +23,23 @@ public class WindowMain
 	//Tamanho vertical da janela.
 	private int ySize = 700;
 	
-	//Offset vertical dos valores em relação à janela.
+	//Offset vertical dos valores em relaï¿½ï¿½o ï¿½ janela.
 	private int verticalWindowOffsetValues = 175;
 	
-	//Offset vertical entre botões.
+	//Offset vertical entre botï¿½es.
 	private int verticalButtonOffsetValues = 120;
 	
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
 	
-	//Tamanho da fonte do título principal.
+	//Tamanho da fonte do tï¿½tulo principal.
 	private int sizeMainTitleFont = 50;
 	
-	//Tamanho da fonte do texto dos botões.
+	//Tamanho da fonte do texto dos botï¿½es.
 	private int sizeButtonFont = 25;
 	
 	/*
-	 * Cria o título principal na tela.
+	 * Cria o tï¿½tulo principal na tela.
 	 */
 	private void createMainTitleInScreen()
 	{
@@ -61,11 +61,11 @@ public class WindowMain
 		this.layout = new SpringLayout();
 		
 		
-		//TÍTULO DA JANELA
+		//Tï¿½TULO DA JANELA
 		createMainTitleInScreen();
 		
-		//BOTÕES
-		JButton buttonInfoRegister = new JButton("Cadastrar informações");
+		//BOTï¿½ES
+		JButton buttonInfoRegister = new JButton("Cadastrar informaÃ§Ãµes");
 		buttonInfoRegister.setFont(new Font(font, Font.BOLD, sizeButtonFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonInfoRegister, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, buttonInfoRegister, verticalWindowOffsetValues + 0*verticalButtonOffsetValues, SpringLayout.NORTH, contentPane);
@@ -79,7 +79,7 @@ public class WindowMain
 		});
 		contentPane.add(buttonInfoRegister);
 		
-		JButton buttonToViewLocalInfo = new JButton("Visualizar informações locais");
+		JButton buttonToViewLocalInfo = new JButton("Visualizar informaÃ§Ãµes locais");
 		buttonToViewLocalInfo.setFont(new Font(font, Font.BOLD, sizeButtonFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonToViewLocalInfo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, buttonToViewLocalInfo, verticalWindowOffsetValues + 1*verticalButtonOffsetValues, SpringLayout.NORTH, contentPane);
@@ -93,7 +93,7 @@ public class WindowMain
 		});
 		contentPane.add(buttonToViewLocalInfo);
 		
-		JButton buttonSearchOnLineInfo = new JButton("Buscar informações on-line");
+		JButton buttonSearchOnLineInfo = new JButton("Buscar informaÃ§Ãµes on-line");
 		buttonSearchOnLineInfo.setFont(new Font(font, Font.BOLD, sizeButtonFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonSearchOnLineInfo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, buttonSearchOnLineInfo, verticalWindowOffsetValues + 2*verticalButtonOffsetValues, SpringLayout.NORTH, contentPane);

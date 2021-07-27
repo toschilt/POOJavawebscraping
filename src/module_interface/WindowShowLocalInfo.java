@@ -11,10 +11,10 @@ public class WindowShowLocalInfo
 	//Janela atual
 	private JFrame janela;
 	
-	//Layout da página
+	//Layout da pï¿½gina
 	private SpringLayout layout;
 	
-	//Componente da página (utilizando somente um para facilitar)
+	//Componente da pï¿½gina (utilizando somente um para facilitar)
 	private Container contentPane;
 	
 	//Tamanho horizontal da janela.
@@ -26,25 +26,25 @@ public class WindowShowLocalInfo
 	//Offset horizontal entre os valores da primeira e da segunda coluna.
 	private int horizontalDataOffsetValues = 500;
 	
-	//Offset vertical entre informações de uma linha para outra.
+	//Offset vertical entre informaï¿½ï¿½es de uma linha para outra.
 	private int vericalDataOffsetValues = 60;
 	
-	//Offset horizontal dos valores em relação ao lado esquerdo da janela.
+	//Offset horizontal dos valores em relaï¿½ï¿½o ao lado esquerdo da janela.
 	private int horizontalWindowOffsetValues = 165;
 	
-	//Offset vertical dos valores em relação à janela.
+	//Offset vertical dos valores em relaï¿½ï¿½o ï¿½ janela.
 	private int verticalWindowOffsetValues = 250;
 	
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
 	
-	//Tamanho da fonte do título principal.
+	//Tamanho da fonte do tï¿½tulo principal.
 	private int sizeMainTitleFont = 50;
 	
 	//Tamanho da fonte dos valores apresentados na tela.
 	private int sizeValueFont = 20;
 	
-	//Tamanho da fonte do texto dos botões.
+	//Tamanho da fonte do texto dos botï¿½es.
 	private int sizeButtonFont = 25;
 	
 	
@@ -58,8 +58,8 @@ public class WindowShowLocalInfo
 	}
 	
 	/*
-	 * Cria na tela o título da informação buscada e o seu correspondente valor
-	 * levando em consideração a linha e a coluna desejada.
+	 * Cria na tela o tï¿½tulo da informaï¿½ï¿½o buscada e o seu correspondente valor
+	 * levando em consideraï¿½ï¿½o a linha e a coluna desejada.
 	 */
 	private void createInfoInScreen(String title, String value, int linha, int coluna)
 	{
@@ -79,7 +79,7 @@ public class WindowShowLocalInfo
 	public WindowShowLocalInfo(String[] infos)
 	{
 		//TODO ajustar String[] infos
-		janela = new JFrame("Informações de " + infos[0]);
+		janela = new JFrame("InformaÃ§Ãµes de " + infos[0]);
 		
 		janela.setSize(xSize, ySize);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,8 +88,8 @@ public class WindowShowLocalInfo
 		this.layout = new SpringLayout();
 		
 		
-		//TÍTULO DA JANELA
-		createMainTitleInScreen("Informações de " + infos[0]);
+		//Tï¿½TULO DA JANELA
+		createMainTitleInScreen("InformaÃ§Ãµes de " + infos[0]);
 		
 		
 		//MOSTRANDO OS VALORES!
@@ -104,7 +104,7 @@ public class WindowShowLocalInfo
 		String valueCPF = infos[1];
 		createInfoInScreen(titleCPF, valueCPF, 2, 1);
 		
-		String titleMotherName = "Nome da mãe: ";
+		String titleMotherName = "Nome da mÃ£e: ";
 		String valueMotherName = infos[6];
 		createInfoInScreen(titleMotherName, valueMotherName, 3, 1);
 		
@@ -114,7 +114,7 @@ public class WindowShowLocalInfo
 		
 		
 		//SEGUNDA COLUNA
-		String titleGender = "Gênero: ";
+		String titleGender = "GÃªnero: ";
 		String valueGender = infos[2];
 		createInfoInScreen(titleGender, valueGender, 1, 2);
 		
@@ -127,7 +127,7 @@ public class WindowShowLocalInfo
 		createInfoInScreen(titleVaccinationGroup, valueVaccinationGroup, 3, 2);
 		
 		
-		//BOTÕES
+		//BOTï¿½ES
 		JButton buttonMainMenu = new JButton("Voltar ao menu principal");
 		buttonMainMenu.setFont(new Font(font, Font.BOLD, sizeButtonFont));
 		layout.putConstraint(SpringLayout.EAST, buttonMainMenu, -50, SpringLayout.EAST, contentPane);
@@ -166,11 +166,11 @@ public class WindowShowLocalInfo
 		String[] infos = new String[7];
 		infos[0] = "Nome";
 		infos[1] = "CPF";
-		infos[2] = "Gênero";
+		infos[2] = "GÃªnero";
 		infos[3] = "Status";
 		infos[4] = "Grupo";
 		infos[5] = "Data de nascimento";
-		infos[6] = "Nome da mãe";
+		infos[6] = "Nome da mÃ£e";
 		
 		new WindowShowLocalInfo(infos);
 	}

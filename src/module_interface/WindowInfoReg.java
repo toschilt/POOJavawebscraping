@@ -13,6 +13,7 @@ import com.opencsv.exceptions.CsvException;
 import local_database.RegistersHandler;
 import module_exceptions.PersonNotFoundException;
 import module_exceptions.RegisterExistsException;
+import local_database.*;
 
 public class WindowInfoReg  {
 
@@ -22,11 +23,11 @@ public class WindowInfoReg  {
     public WindowInfoReg() {
         
         // criando as variaveis
-    	this.janela = new JFrame("Cadastro de Informações");
+    	this.janela = new JFrame("Cadastro de InformaÃ§Ãµes");
 
         Container contentPane = janela.getContentPane();
         SpringLayout layout = new SpringLayout();
-        JLabel titulo = new JLabel("Cadastro de Informações");
+        JLabel titulo = new JLabel("Cadastro de InformaÃ§Ãµes");
         
         JButton buttonReg = new JButton("Cadastrar");
         JButton buttonCancel = new JButton("Cancelar");
@@ -49,7 +50,7 @@ public class WindowInfoReg  {
         JLabel labelattGroup = new JLabel("Grupo de Atendimento");
         JTextField attGroup = new JTextField(20);
         
-        JLabel labelmotherName = new JLabel("Nome da Mãe");
+        JLabel labelmotherName = new JLabel("Nome da MÃ£e");
         JTextField motherName = new JTextField(40);
 
         // titulo
@@ -95,7 +96,7 @@ public class WindowInfoReg  {
         layout.putConstraint(SpringLayout.WEST, motherName, 100, SpringLayout.WEST, contentPane);
         layout.putConstraint(SpringLayout.NORTH, motherName, 165 + 180 + 20, SpringLayout.NORTH, contentPane);
         
-        // botões
+        // botï¿½es
         buttonReg.setFont(new Font("Arial", Font.BOLD, 25));
         buttonReg.addActionListener(new ActionListener() {
 		    
@@ -107,7 +108,7 @@ public class WindowInfoReg  {
         			reg = new RegistersHandler();
         		}
         		catch(Exception exc) {
-        			new WindowError("Não é possível acessar as informações locais!");
+        			new WindowError("NÃ£o Ã© possÃ£vel acessar as informaÃ§Ãµes locais!");
         		}
 		    	
 		    	String[] infos = new String[7];
@@ -120,8 +121,8 @@ public class WindowInfoReg  {
 		    	infos[6] = motherName.getText();
 		    	
 		    	boolean algumCampoVazio = false;
-		    	for(int i = 0; i < infos.length; i++)
-		    	{
+
+		    	for(int i = 0; i < infos.length; i++) {
 		    		if(infos[i].isEmpty())
 		    		{
 		    			algumCampoVazio = true;
@@ -129,10 +130,29 @@ public class WindowInfoReg  {
 		    	}
 		    	
 		    	
-		    	if(algumCampoVazio)
-		    	{
+		    	if(algumCampoVazio) {
 		    		new WindowError("Preencha todos os campos!");
 		    	}
+		    	else if(!infos[3].equals(RegistersHandler.deathStatus) && !infos[3].equals(RegistersHandler.caseStatus) &&
+		    			!infos[3].equals(RegistersHandler.vaccinatedStatusFirstDose) &&
+		    			!infos[3].equals(RegistersHandler.vaccinatedStatusSecondDose) && 
+		    			!infos[3].equals(RegistersHandler.vaccinatedStatusOnlyDose)) {
+		    		
+		    		String possibleOptions = RegistersHandler.deathStatus + " / " + RegistersHandler.caseStatus + 
+		    				" / " + RegistersHandler.vaccinatedStatusFirstDose + " / " + RegistersHandler.vaccinatedStatusSecondDose
+		    				+ " / " + RegistersHandler.vaccinatedStatusOnlyDose;
+		    		
+		    		new WindowError("Insira um Tipo de Caso vÃ¡lido!", possibleOptions);
+		    	}
+		    	else if(!infos[2].equals("Masculino") && !infos[2].equals("Feminino")) {
+		    		String possibleOptions = "Masculino / Feminino";
+		    		new WindowError("Insira um Sexo vÃ¡lido!", possibleOptions);
+		    	}
+		    	else if(!infos[2].equals("PrioritÃ¡rio") && !infos[2].equals("MÃ©dio") && !infos[2].equals("Baixo")) {
+		    		String possibleOptions = "PrioritÃ¡rio / MÃ©dio / Baixo";
+		    		new WindowError("Insira um Grupo de Atendimento vÃ¡lido!", possibleOptions);
+		    	}
+		    	
 		    	else
 		    	{
 		    		try {
@@ -145,13 +165,13 @@ public class WindowInfoReg  {
 			    	}
 		    		catch(IOException ioExc)
 		    		{
-		    			new WindowError("Não é possível acessar as informações locais!");
+		    			new WindowError("NÃ£o Ã© possÃ­vel acessar as informaÃ§Ãµes locais!");
 		    		}
 			    	catch(RegisterExistsException existExc) {
-		                Object[] options = {"Sim", "Não", "Cancelar"};
+		                Object[] options = {"Sim", "Nï¿½o", "Cancelar"};
 		                JOptionPane op = new JOptionPane();
 		                op.setSize(600, 300);
-		                int input = JOptionPane.showOptionDialog(null, "Atualizar Cadastro?", "Atenção!", JOptionPane.YES_NO_CANCEL_OPTION,
+		                int input = JOptionPane.showOptionDialog(null, "Atualizar Cadastro?", "AtenÃ§Ã£o!", JOptionPane.YES_NO_CANCEL_OPTION,
 		                            JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		                switch (input) {
 		                    case JOptionPane.OK_OPTION:
@@ -161,7 +181,7 @@ public class WindowInfoReg  {
 						    		janela.dispose();
 									new WindowSucess("Atualizado com sucesso!");
 								} catch (Exception InfoExc) {
-									new WindowError("Não é possível acessar as informações locais!");
+									new WindowError("NÃ£o Ã© possÃ­vel acessar as informaÃ§Ãµes locais!");
 								}                	
 		                        break;
 		                    case JOptionPane.CANCEL_OPTION:
