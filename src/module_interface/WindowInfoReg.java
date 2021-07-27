@@ -144,13 +144,14 @@ public class WindowInfoReg  {
 		    			new WindowError("Não é possível acessar as informações locais!");
 		    		}
 			    	catch(RegisterExistsException existExc) {
-			    		JOptionPane op = new JOptionPane();
+		                Object[] options = {"Sim", "Não", "Cancelar"};
+		                JOptionPane op = new JOptionPane();
 		                op.setSize(600, 300);
-		                int input = JOptionPane.showConfirmDialog(null, "Atualizar Cadastro?");
-		                
-		                switch(input) {
+		                int input = JOptionPane.showOptionDialog(null, "Atualizar Cadastro?", "Atenção!", JOptionPane.YES_NO_CANCEL_OPTION,
+		                            JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+		                switch (input) {
 		                    case JOptionPane.OK_OPTION:
-		                        //TODO todones meu caro amigo faça a boa aqui imediatamente amo vc <3 abraço
+		                        System.out.println("OK!!!!");
 		                        break;
 		                    case JOptionPane.CANCEL_OPTION:
 		                        op.setVisible(false);
