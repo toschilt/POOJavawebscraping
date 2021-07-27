@@ -2,6 +2,9 @@ package local_database;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.opencsv.exceptions.CsvException;
+
 import module_exceptions.*;
 
 
@@ -101,7 +104,7 @@ public class RegistersHandler {
     }
 
 
-    public void updateInformation(String[] updatedData) throws PersonNotFoundException {
+    public void updateInformation(String[] updatedData) throws PersonNotFoundException, IOException, CsvException {
         
     	int registerIndex = userExists(updatedData[0], updatedData[1], true);
     	

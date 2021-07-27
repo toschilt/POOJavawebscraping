@@ -1,7 +1,16 @@
 package local_database;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvException;
+
+import net.sourceforge.htmlunit.corejs.javascript.ast.ForInLoop;
+
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -60,8 +69,21 @@ public class DataFileHandler {
     }
     
     
-    public static void updateDataInExternalFile(int row, String[] newData) {
+    public static void updateDataInExternalFile(int row, String[] newData) throws IOException, CsvException {
     	
+    	File dataFile = new File(fileName);
+    	CSVReader csvReader = new CSVReader(new FileReader(dataFile));
+    	List<String[]> csvBody = csvReader.readAll();
+    	
+    	for(int i = 0; i < newData.length; i++) {
+    		csvBody.get(row)[i] = newData[i];
+    	}
+    	csvReader.close();
+    	
+    	CSVWriter csvWriter = new CSVWriter(new FileWriter(dataFile));
+    	csvWriter.writeAll(csvBody);
+    	csvWriter.flush();
+    	csvWriter.close();
     }
     
 }
