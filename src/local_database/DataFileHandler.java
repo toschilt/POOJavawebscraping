@@ -2,22 +2,25 @@ package local_database;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 
-import net.sourceforge.htmlunit.corejs.javascript.ast.ForInLoop;
-
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class DataFileHandler {
 	
 	public static final String fileName = "LocalData.csv";
+	public static final String SEPARATOR = ",";
 	
 	
 	private DataFileHandler() {}
@@ -29,7 +32,7 @@ public class DataFileHandler {
     	
     	String row;
     	while ((row = csvReader.readLine()) != null) {
-            String[] data = row.split(",");
+            String[] data = row.split(SEPARATOR);
             registers.add(new Register(data));
         }
     	
@@ -42,12 +45,12 @@ public class DataFileHandler {
     	try {
 	    	FileWriter csvWriter = new FileWriter(fileName);
 	
-	    	csvWriter.append("FullName").append(",");
-	    	csvWriter.append("CPF").append(",");
-	    	csvWriter.append("Gender").append(",");
-	    	csvWriter.append("Status").append(",");
-	    	csvWriter.append("Group").append(",");
-	    	csvWriter.append("Birth").append(",");
+	    	csvWriter.append("FullName").append(SEPARATOR);
+	    	csvWriter.append("CPF").append(SEPARATOR);
+	    	csvWriter.append("Gender").append(SEPARATOR);
+	    	csvWriter.append("Status").append(SEPARATOR);
+	    	csvWriter.append("Group").append(SEPARATOR);
+	    	csvWriter.append("Birth").append(SEPARATOR);
 	    	csvWriter.append("MothersName").append("\n");
 	
 	    	csvWriter.flush();
@@ -61,7 +64,7 @@ public class DataFileHandler {
 
     	FileWriter csvWriter = new FileWriter(fileName, true);
 
-	    csvWriter.append(String.join(",", data));
+	    csvWriter.append(String.join(SEPARATOR, data));
 	    csvWriter.append("\n");
 
     	csvWriter.flush();
@@ -69,21 +72,48 @@ public class DataFileHandler {
     }
     
     
-    public static void updateDataInExternalFile(int row, String[] newData) throws IOException, CsvException {
+    public static void updateDataInExternalFile(int row, String[] newData) throws IOException {
     	
-    	File dataFile = new File(fileName);
-    	CSVReader csvReader = new CSVReader(new FileReader(dataFile));
-    	List<String[]> csvBody = csvReader.readAll();
+		String tempFile = "NewFile.txt";
+		File oldFile = new File(fileName);
+		File newFile = new File(tempFile);
+		
+		String[] nextData = new String[newData.length];
+	
+		FileWriter fw = new FileWriter(tempFile, true);
+		BufferedWriter bw = new BufferedWriter(fw);
+		PrintWriter pw = new PrintWriter(bw);
+		
+		Scanner scanner = new Scanner(new File(fileName));
+		scanner.useDelimiter("[,\n]");
+		
+		while(scanner.hasNext()) {
+			for(int i = 0; i < nextData.length; i++) {
+				nextData[i] = scanner.next();
+			}
+			
+			if(nextData[0].equals(newData[0]) || nextData[1].equals(newData[1])) {
+				for(int i = 0; i < newData.length - 1; i++) {
+					pw.printf(newData[i] + SEPARATOR);
+				}
+				pw.printf(newData[newData.length-1] + "\n");
+			}
+			
+			else { 
+				for(int i = 0; i < nextData.length - 1; i++) {
+					pw.printf(nextData[i] + SEPARATOR);
+				}
+				pw.printf(nextData[nextData.length-1] + "\n");
+			}
+		}
+		
+		scanner.close();
+		pw.flush();
+		pw.close();
+		oldFile.delete();
+		File dump = new File(fileName);
+		newFile.renameTo(dump);
     	
-    	for(int i = 0; i < newData.length; i++) {
-    		csvBody.get(row)[i] = newData[i];
-    	}
-    	csvReader.close();
-    	
-    	CSVWriter csvWriter = new CSVWriter(new FileWriter(dataFile));
-    	csvWriter.writeAll(csvBody);
-    	csvWriter.flush();
-    	csvWriter.close();
     }
     
 }
