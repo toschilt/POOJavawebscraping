@@ -33,27 +33,18 @@ public class DataFileHandler {
     	try {
 	    	FileWriter csvWriter = new FileWriter(fileName);
 	
-	    	csvWriter.append("FullName");
-	    	csvWriter.append(",");
-	    	csvWriter.append("CPF");
-	    	csvWriter.append(",");
-	    	csvWriter.append("Gender");
-	    	csvWriter.append(",");
-	    	csvWriter.append("Status");
-	    	csvWriter.append(",");
-	    	csvWriter.append("Group");
-	    	csvWriter.append(",");
-	    	csvWriter.append("Birth");
-	    	csvWriter.append(",");
-	    	csvWriter.append("MothersName");
-		    csvWriter.append("\n");
+	    	csvWriter.append("FullName").append(",");
+	    	csvWriter.append("CPF").append(",");
+	    	csvWriter.append("Gender").append(",");
+	    	csvWriter.append("Status").append(",");
+	    	csvWriter.append("Group").append(",");
+	    	csvWriter.append("Birth").append(",");
+	    	csvWriter.append("MothersName").append("\n");
 	
 	    	csvWriter.flush();
 	    	csvWriter.close();
     	
-    	} catch(Exception e) {
-    		throw new IOException("Unable to create data file");
-    	}
+    	} catch(Exception e) { throw new IOException("Unable to create data file"); }
     }
     
 
@@ -66,6 +57,11 @@ public class DataFileHandler {
 
     	csvWriter.flush();
     	csvWriter.close();
+    }
+    
+    
+    public static void updateDataInExternalFile(int row, String[] newData) {
+    	
     }
     
 }
