@@ -18,11 +18,11 @@ public class WindowSearchLocalInfo  {
     public WindowSearchLocalInfo() {
         
         // criando as variaveis
-    	this.janela = new JFrame("Visualização de Informações Locais");
+    	this.janela = new JFrame("VisualizaÃ§Ã£o de InformaÃ§Ãµes Locais");
     	
         Container contentPane = janela.getContentPane();
         SpringLayout layout = new SpringLayout();
-        JLabel titulo = new JLabel("Visualização de Informações Locais");
+        JLabel titulo = new JLabel("VisualizaÃ§Ã£o de InformaÃ§Ãµes Locais");
         
         JButton buttonSearch = new JButton("Buscar");
         JButton buttonCancel = new JButton("Cancelar");
@@ -51,7 +51,7 @@ public class WindowSearchLocalInfo  {
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, cpf, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
         layout.putConstraint(SpringLayout.NORTH, cpf, 165 + 120 + 20, SpringLayout.NORTH, contentPane);
         
-        // botões
+        // botï¿½es
         buttonSearch.setFont(new Font("Arial", Font.BOLD, 25));
         buttonSearch.addActionListener(new ActionListener() {
 		    @Override
@@ -62,7 +62,7 @@ public class WindowSearchLocalInfo  {
         			reg = new RegistersHandler();
         		}
         		catch(Exception exc) {
-        			new WindowError("Não é possível acessar as informações locais!");
+        			new WindowError("NÃ£o Ã© possÃ­vel acessar as informaÃ§Ãµes locais!");
         		}
 		    	
 		    	if(!cpf.getText().isEmpty())
@@ -77,7 +77,7 @@ public class WindowSearchLocalInfo  {
 		    		}
 		    		catch(PersonNotFoundException exc)
 		    		{
-		    			new WindowError("Registro não encontrado!");
+		    			new WindowError("Registro nÃ£o encontrado!");
 		    		}
 		    	}
 		    	else if(!name.getText().isEmpty())
@@ -92,7 +92,7 @@ public class WindowSearchLocalInfo  {
 		    		}
 		    		catch(PersonNotFoundException exc)
 		    		{
-		    			new WindowError("Registro não encontrado!");
+		    			new WindowError("Registro nÃ£o encontrado!");
 		    		}
 		    	}
 		    	else

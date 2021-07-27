@@ -13,21 +13,31 @@ public class RegistersHandler {
     private ArrayList<Register> registers;
     
     //Defines para o nome de cada "status"
-    private static final String deathStatus = "Óbito";
-    private static final String caseStatus = "Contaminado";
-    private static final String vaccinatedStatus = "Vacinado";
+    public static final String deathStatus = "Óbito";
+    public static final String caseStatus = "Contaminado";
+    public static final String vaccinatedStatusFirstDose = "Vacinado 1D";
+    public static final String vaccinatedStatusSecondDose= "Vacinado 2D";
+    public static final String vaccinatedStatusOnlyDose = "Vacinado Única";
+    
+    public static final String prioritaryGroup = "Prioritário";
+    public static final String mediumGroup = "Médio";
+    public static final String lastGroup = "Baixo";
+    
+    public static final String maleSex = "Masculino";
+    public static final String femaleSex = "Feminino";
+    
     
 
     //Construtor
     public RegistersHandler() throws CannotCreateDataFileException {
-    	//Inicializa��o do arquivo
+    	//Inicializa��o do arquivo
     	try { registers = DataFileHandler.loadDataFromExternalFile(); }
 	    catch(Exception e) {
 	    	//Arquivo de dados não existe
 	    	registers = new ArrayList<Register>();
 	    	
 	    	try { DataFileHandler.createDataFile(); }
-	    	catch(Exception q) { //N�o foi poss�vel criar arquivo de dados
+	    	catch(Exception q) { //N�o foi poss�vel criar arquivo de dados
 	    		throw new CannotCreateDataFileException("Unable to create data file");
 			}
 		}
@@ -109,6 +119,7 @@ public class RegistersHandler {
     	int registerIndex = userExists(updatedData[0], updatedData[1], true);
     	System.out.println(registerIndex + "");
     	
+    	//Busca pelo registro, atualiza informações da pessoa e do arquivo de dados
     	if(registerIndex != -1) {
     		Register registerToUpdate = registers.get(registerIndex);
     		registerToUpdate.update(updatedData);
@@ -120,6 +131,7 @@ public class RegistersHandler {
     }
     
     
+    //Coleta a quantidade de registros de um certo tipo
     public int getDeaths() {
     	int deaths = 0;
     	for(Register register : registers) {
@@ -141,7 +153,11 @@ public class RegistersHandler {
     public int getVaccinated() {
     	int vaccinated = 0;
     	for(Register register : registers) {
-    		if(register.getPersonalData().getStatus().equals(vaccinatedStatus)) { vaccinated++; }
+    		if(register.getPersonalData().getStatus().equals(vaccinatedStatusFirstDose) ||
+    				register.getPersonalData().getStatus().equals(vaccinatedStatusSecondDose) ||
+    				register.getPersonalData().getStatus().equals(vaccinatedStatusOnlyDose)) {
+    			vaccinated++; 
+    		}
     	}
     	return vaccinated;
     }

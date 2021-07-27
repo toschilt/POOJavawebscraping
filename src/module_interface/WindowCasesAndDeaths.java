@@ -18,10 +18,10 @@ public class WindowCasesAndDeaths
 	//Janela atual
 	private JFrame janela;
 	
-	//Layout da p·gina
+	//Layout da pÔøΩgina
 	private SpringLayout layout;
 	
-	//Componente da p·gina (utilizando somente um para facilitar)
+	//Componente da pÔøΩgina (utilizando somente um para facilitar)
 	private Container contentPane;
 	
 	//Tamanho horizontal da janela.
@@ -33,19 +33,19 @@ public class WindowCasesAndDeaths
 	//Offset horizontal entre os valores da primeira e da segunda coluna.
 	private int horizontalDataOffsetValues = 500;
 	
-	//Offset vertical entre informaÁıes de uma linha para outra.
+	//Offset vertical entre informaÔøΩÔøΩes de uma linha para outra.
 	private int vericalDataOffsetValues = 60;
 	
-	//Offset horizontal dos valores em relaÁ„o ao lado esquerdo da janela.
+	//Offset horizontal dos valores em relaÔøΩÔøΩo ao lado esquerdo da janela.
 	private int horizontalWindowOffsetValues = 150;
 	
-	//Offset vertical dos valores em relaÁ„o ao topo da janela
+	//Offset vertical dos valores em relaÔøΩÔøΩo ao topo da janela
 	private int verticalWindowOffsetValues = 330;
 	
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
 	
-	//Tamanho da fonte do tÌtulo principal.
+	//Tamanho da fonte do tÔøΩtulo principal.
 	private int sizeMainTitleFont = 50;
 	
 	//Tamanho da fonte do subtitulo principal.
@@ -54,7 +54,7 @@ public class WindowCasesAndDeaths
 	//Tamanho da fonte dos valores apresentados na tela.
 	private int sizeValueFont = 20;
 	
-	//Tamanho da fonte do texto dos botıes.
+	//Tamanho da fonte do texto dos botÔøΩes.
 	private int sizeButtonFont = 25;
 
 	private InfoSPState info;
@@ -67,13 +67,13 @@ public class WindowCasesAndDeaths
 	
 	private void createMainTitleInScreen(String dataAtualizacao)
 	{
-		JLabel labelTitulo = new JLabel("InformaÁıes Casos e ”bitos");
+		JLabel labelTitulo = new JLabel("Informa√ß√µes Casos e √ìbitos");
 		labelTitulo.setFont(new Font(font, Font.BOLD, sizeMainTitleFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelTitulo, 50, SpringLayout.NORTH, contentPane);
 		contentPane.add(labelTitulo);
 		
-		JLabel labelSubTitulo = new JLabel("InformaÁıes atualizadas em: " + dataAtualizacao);
+		JLabel labelSubTitulo = new JLabel("Informa√ß√µes atualizadas em: " + dataAtualizacao);
 		labelSubTitulo.setFont(new Font(font, Font.BOLD, sizeSubTitleFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelSubTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelSubTitulo, 65, SpringLayout.NORTH, labelTitulo);
@@ -81,8 +81,8 @@ public class WindowCasesAndDeaths
 	}
 	
 	/*
-	 * Cria na tela o tÌtulo da informaÁ„o buscada e o seu correspondente valor
-	 * levando em consideraÁ„o a linha e a coluna desejada.
+	 * Cria na tela o tÔøΩtulo da informaÔøΩÔøΩo buscada e o seu correspondente valor
+	 * levando em consideraÔøΩÔøΩo a linha e a coluna desejada.
 	 */
 	private void createInfoInScreen(String title, String value, int linha, int coluna)
 	{
@@ -102,7 +102,7 @@ public class WindowCasesAndDeaths
 	public WindowCasesAndDeaths()
 	{
 		String dataAtualizacao = getDateTime();
-		this.janela = new JFrame("InformaÁıes da VacinaÁ„o (em " + dataAtualizacao + ")");
+		this.janela = new JFrame("Informa√ß√£es da Vacina√ß√£o (em " + dataAtualizacao + ")");
 		
 		janela.setSize(xSize, ySize);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,11 +120,11 @@ public class WindowCasesAndDeaths
 
 		String titleConfirmedCases = "Casos confirmados: ";
 		String valueConfirmedCases;
-		String titleDeaths = "”bitos: ";
+		String titleDeaths = "√ìbitos: ";
 		String valueDeaths;
-		String titleIsolatingIndex = "Õndice de isolamento ";
+		String titleIsolatingIndex = "√çndice de isolamento ";
 		String valueIsolatingIndex;
-		String titlePercentageVaccinated = "Porcentagem da populaÁ„o vacinada: ";
+		String titlePercentageVaccinated = "Porcentagem da popula√ß√£o vacinada: ";
 		String valuePercentageVaccinated;
 		String errorOccurred = "Nao foi possivel captar os dados";
 
