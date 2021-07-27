@@ -71,10 +71,8 @@ public class RegistersHandler {
     	return -1;
     }
     
-    
-
+ 
     public void registerNewCase(String[] data) throws RegisterExistsException, IOException {
-    	
     	//Checa se um usuário com essas informações já existe
     	if(userExists(data[0], data[1]) != null) {
     		//Em caso afirmativo, retorna uma excessão
@@ -86,7 +84,6 @@ public class RegistersHandler {
         registers.add(newRegister);
         
         DataFileHandler.saveToExternalFile(data);
-        
     }
 
 
@@ -116,7 +113,6 @@ public class RegistersHandler {
         
         throw new PersonNotFoundException("Pessoa não encontrada");
     }
-    
     
     
     public int getDeaths() {

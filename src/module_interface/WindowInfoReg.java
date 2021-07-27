@@ -1,21 +1,28 @@
 package module_interface;
 
-import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-public class WindowInfoReg extends JFrame  {
+import local_database.RegistersHandler;
+import module_exceptions.PersonNotFoundException;
 
+public class WindowInfoReg  {
+
+	//Janela atual
+	private JFrame janela;
+	
     public WindowInfoReg() {
         
         // criando as variaveis
-        super("Cadastro de InformaÃ§Ãµes");
-        Container contentPane = this.getContentPane();
+    	this.janela = new JFrame("Cadastro de Informações");
+
+        Container contentPane = janela.getContentPane();
         SpringLayout layout = new SpringLayout();
-        JLabel titulo = new JLabel("Cadastro de InformaÃ§Ãµes");
+        JLabel titulo = new JLabel("Cadastro de Informações");
         
         JButton buttonReg = new JButton("Cadastrar");
         JButton buttonCancel = new JButton("Cancelar");
@@ -38,15 +45,15 @@ public class WindowInfoReg extends JFrame  {
         JLabel labelattGroup = new JLabel("Grupo de Atendimento");
         JTextField attGroup = new JTextField(20);
         
-        JLabel labelmotherName = new JLabel("Nome da MÃ£e");
+        JLabel labelmotherName = new JLabel("Nome da Mãe");
         JTextField motherName = new JTextField(40);
 
         // titulo
-	titulo.setFont(new Font("Arial", Font.BOLD, 50));
-	layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, titulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
-	layout.putConstraint(SpringLayout.NORTH, titulo, 50, SpringLayout.NORTH, contentPane);
+		titulo.setFont(new Font("Arial", Font.BOLD, 50));
+		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, titulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
+		layout.putConstraint(SpringLayout.NORTH, titulo, 50, SpringLayout.NORTH, contentPane);
         contentPane.add(titulo);
-        this.setSize(1200, 700);
+        janela.setSize(1200, 700);
         
         // campos de texto
         layout.putConstraint(SpringLayout.WEST, labelCaseType, 100, SpringLayout.WEST, contentPane);
@@ -84,15 +91,49 @@ public class WindowInfoReg extends JFrame  {
         layout.putConstraint(SpringLayout.WEST, motherName, 100, SpringLayout.WEST, contentPane);
         layout.putConstraint(SpringLayout.NORTH, motherName, 165 + 180 + 20, SpringLayout.NORTH, contentPane);
         
-        // botÃµes
+        // botões
         buttonReg.setFont(new Font("Arial", Font.BOLD, 25));
+        buttonReg.addActionListener(new ActionListener() {
+		    
+        	@Override
+		    public void actionPerformed(ActionEvent e) {
+		    	RegistersHandler reg = new RegistersHandler();
+		    	
+		    	String[] infos = new String[7];
+		    	infos[0] = name.getText();
+		    	infos[1] = cpf.getText();
+		    	infos[2] = gender.getText();
+		    	infos[3] = caseType.getText();
+		    	infos[4] = attGroup.getText();
+		    	infos[5] = birthDate.getText();
+		    	infos[6] = motherName.getText();
+		    	
+		    	try {
+		    		reg.registerNewCase(infos);
+		    		
+		    		//TODO inserir janela de IAI SEU PORRA FUNCIONOU BRIGADO
+		    	}
+		    	catch(Exception exc) {
+		    		//TODO inserir janela de IAI SEU PORRA DEU MERDA CARAI RESOLVE AÍ VALEEEEEEU
+		    	}
+		    	
+		    }
+		});
+        
         buttonCancel.setFont(new Font("Arial", Font.BOLD, 25));
+        buttonCancel.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	janela.setVisible(false);
+		    	janela.dispose();
+		    	new WindowMain();
+		    }
+		});
+        
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonReg, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
-	layout.putConstraint(SpringLayout.NORTH, buttonReg, 450, SpringLayout.NORTH, contentPane);
+        layout.putConstraint(SpringLayout.NORTH, buttonReg, 450, SpringLayout.NORTH, contentPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonCancel, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
-	layout.putConstraint(SpringLayout.NORTH, buttonCancel, 500, SpringLayout.NORTH, contentPane);
-        //buttonOK.addActionListener(this);
-        //buttonLimpa.addActionListener(this);
+        layout.putConstraint(SpringLayout.NORTH, buttonCancel, 500, SpringLayout.NORTH, contentPane);
         
         // adicionando ao painel
         contentPane.add(labelCaseType);
@@ -112,11 +153,10 @@ public class WindowInfoReg extends JFrame  {
         contentPane.add(buttonReg);
         contentPane.add(buttonCancel);
         contentPane.setLayout(layout);
-        this.setVisible(true); 
-        
+        janela.setVisible(true); 
     }  
     
     public static void main(String[] args){
-	new WindowInfoReg();
+    	new WindowInfoReg();
     }
 }

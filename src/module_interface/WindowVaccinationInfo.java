@@ -143,8 +143,8 @@ public class WindowVaccinationInfo
 			valuePercentageVaccinated = errorOccurred;
 		}
 
-		createInfoInScreen(titleAppliedDose, valueAppliedDose, 2, 1);
-		createInfoInScreen(titleFirstDose, valueFirstDose, 1, 1);
+		createInfoInScreen(titleAppliedDose, valueAppliedDose, 1, 1);
+		createInfoInScreen(titleFirstDose, valueFirstDose, 2, 1);
 		createInfoInScreen(titleSecondDose, valueSecondDose, 3, 1);
 		createInfoInScreen(titleOnlyDose, valueOnlyDose, 1, 2);
 		createInfoInScreen(titlePercentageVaccinated, valuePercentageVaccinated, 2, 2);

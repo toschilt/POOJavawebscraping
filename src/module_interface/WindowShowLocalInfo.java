@@ -76,9 +76,10 @@ public class WindowShowLocalInfo
 		contentPane.add(labelValue);
 	}
 	
-	public WindowShowLocalInfo(String userSearched)
+	public WindowShowLocalInfo(String infos)
 	{
-		janela = new JFrame("Informações de " + userSearched);
+		//TODO ajustar String[] infos
+		janela = new JFrame("Informações de " + infos[0]);
 		
 		janela.setSize(xSize, ySize);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,7 +101,7 @@ public class WindowShowLocalInfo
 		createInfoInScreen(titleName, valueName, 1, 1);
 		
 		String titleCPF = "CPF: ";
-		String valueCPF = "465.859.478-19";
+		String valueCPF = "";
 		createInfoInScreen(titleCPF, valueCPF, 2, 1);
 		
 		String titleMotherName = "Nome da mãe: ";

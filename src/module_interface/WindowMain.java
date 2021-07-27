@@ -74,7 +74,7 @@ public class WindowMain
 		    public void actionPerformed(ActionEvent e) {
 		    	janela.setVisible(false);
 		    	janela.dispose();
-		    	//TODO colocar o new Página() aqui!
+		    	new WindowInfoReg();
 		    }
 		});
 		contentPane.add(buttonInfoRegister);
@@ -88,7 +88,7 @@ public class WindowMain
 		    public void actionPerformed(ActionEvent e) {
 		    	janela.setVisible(false);
 		    	janela.dispose();
-		    	//TODO colocar o new Página() aqui!
+		    	new WindowSearchLocalInfo();
 		    }
 		});
 		contentPane.add(buttonToViewLocalInfo);
@@ -102,7 +102,7 @@ public class WindowMain
 		    public void actionPerformed(ActionEvent e) {
 		    	janela.setVisible(false);
 		    	janela.dispose();
-		    	//TODO colocar o new Página() aqui!
+		    	new WindowShowOnlineInfo();
 		    }
 		});
 		contentPane.add(buttonSearchOnLineInfo);
