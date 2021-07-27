@@ -9,12 +9,13 @@ public class RegistersHandler {
     
     private ArrayList<Register> registers;
     
+    //Defines para o nome de cada "status"
     private static final String deathStatus = "Óbito";
     private static final String caseStatus = "Contaminado";
     private static final String vaccinatedStatus = "Vacinado";
-    //Adicionar opção de doses?
     
 
+    //Construtor
     public RegistersHandler() throws CannotCreateDataFileException {
     	//Inicialização do arquivo
     	try { registers = DataFileHandler.loadDataFromExternalFile(); }
@@ -30,11 +31,13 @@ public class RegistersHandler {
     }
 
     
+    //Verifica se um usuário já existe com base em um identificador (nome ou CPF)
     private Register userExists(String identifier) {
     	for(Register register : registers) {
-        	String nextName = register.getPersonalData().getFullName();
+        	
+    		String nextName = register.getPersonalData().getFullName();
         	String nextCPF = register.getPersonalData().getCPF();
-            
+        	
         	if(identifier.equals(nextName) || identifier.equals(nextCPF)) {
                 return register;
             }
@@ -42,27 +45,43 @@ public class RegistersHandler {
     	return null;
     }
     
-    private boolean userExists(String name, String cpf) {
-    	
+    //Verifica se um usuário já existe com base no nome e CPF
+    private Register userExists(String name, String cpf) {
     	for(Register register : registers) {
         	String nextName = register.getPersonalData().getFullName();
         	String nextCPF = register.getPersonalData().getCPF();
             
         	if(name.equals(nextName) || cpf.equals(nextCPF)) {
-                return true;
+                return register;
             }
     	}
-    	
-    	return false;
+    	return null;
     }
+    
+    //Verifica se um usuário já existe com base no nome e CPF
+    private int userExists(String name, String cpf, boolean index) {
+    	for(Register register : registers) {
+        	String nextName = register.getPersonalData().getFullName();
+        	String nextCPF = register.getPersonalData().getCPF();
+            
+        	if(name.equals(nextName) || cpf.equals(nextCPF)) {
+                return registers.indexOf(register);
+            }
+    	}
+    	return -1;
+    }
+    
     
 
     public void registerNewCase(String[] data) throws RegisterExistsException, IOException {
     	
-    	if(userExists(data[0], data[1])) {
+    	//Checa se um usuário com essas informações já existe
+    	if(userExists(data[0], data[1]) != null) {
+    		//Em caso afirmativo, retorna uma excessão
     		throw new RegisterExistsException("Cadastro já existente");
     	}
     	
+    	//Registra o novo usuário e salva no CSV
         Register newRegister = new Register(data);
         registers.add(newRegister);
         
@@ -72,26 +91,28 @@ public class RegistersHandler {
 
 
     public String[] searchForCase(String identifier) throws PersonNotFoundException {
-        
+    	
+    	//Verifica se o registro já existe
     	Register register = userExists(identifier);
     	if(register != null) {
+    		//Caso exista, retorna um vetor de String com as informações
     		return register.getPersonalData().getFullData();
     	}
         
+    	//Caso contrário, lança uma nova excessão
         throw new PersonNotFoundException("Pessoa não encontrada");
     }
 
 
-    public void updateInformation(String identifier, String updatedData) throws PersonNotFoundException {
+    public void updateInformation(String[] updatedData) throws PersonNotFoundException {
         
-        for(Register register : registers) {
-        	String nextName = register.getPersonalData().getFullName();
-        	String nextCPF = register.getPersonalData().getCPF();
-            
-        	if(identifier.equals(nextName) || identifier.equals(nextCPF)) {
-                register.update(updatedData);
-            }
-        }
+    	int registerIndex = userExists(updatedData[0], updatedData[1], true);
+    	
+    	if(registerIndex != -1) {
+    		Register registerToUpdate = registers.get(registerIndex);
+    		registerToUpdate.update(updatedData);
+    		DataFileHandler.updateDataInExternalFile(registerIndex, updatedData);
+    	}
         
         throw new PersonNotFoundException("Pessoa não encontrada");
     }

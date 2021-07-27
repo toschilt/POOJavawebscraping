@@ -2,10 +2,12 @@ package local_database;
 
 public class Person {
     
+	//Atributos
     private String fullName, cpf;
     private String status, group;
     private String gender, birth, mothersName;
 
+    //Construtores
     public Person(String status, String group, String fullName, 
     		String gender, String birth, String mothersName, String cpf) {
         this.status = status;
@@ -29,9 +31,21 @@ public class Person {
     }
     
     
+    //Retornar informações
+	public String[] getFullData() {
+		String[] information = new String[7];
+		information[0] = getFullName();
+		information[1] = getCPF();
+		information[2] = getGender();
+		information[3] = getStatus();
+		information[4] = getGroup();
+		information[5] = getBirth();
+		information[6] = getMother();
+		return information;
+	}
+    
     @Override
     public String toString() {
-        //String contendo as informações de person, separar em formato CSV
         StringBuilder s = new StringBuilder();
         s.append("information {\n");
         s.append("\tName: " + getFullName() + "\n");
@@ -44,6 +58,7 @@ public class Person {
         s.append("}");
         return s.toString();
     }
+    
 
     //Getters
 	public String getCPF() 		{ return this.cpf; }
@@ -55,12 +70,12 @@ public class Person {
 	public String getMother() 	{ return this.mothersName; }
 	
 	//Setters
-	public void setFullName(String fullName) { this.fullName = fullName; }
-	public void setCPF(String cpf) { this.cpf = cpf; }
-	public void setStatus(String status) { this.status = status; }
-	public void setGroup(String group) { this.group = group; }
-	public void setGender(String gender) { this.gender = gender; }
-	public void getBirth(String birth) { this.birth = birth; }
-	public void getMother(String mothersName) { this.mothersName = mothersName; }
+	public void setFullName(String fullName) 	{ this.fullName = fullName; }
+	public void setCPF(String cpf) 			 	{ this.cpf = cpf; }
+	public void setStatus(String status)  	 	{ this.status = status; }
+	public void setGroup(String group) 		 	{ this.group = group; }
+	public void setGender(String gender) 	 	{ this.gender = gender; }
+	public void setBirth(String birth) 		 	{ this.birth = birth; }
+	public void setMother(String mothersName) 	{ this.mothersName = mothersName; }
 
 }
