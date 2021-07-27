@@ -4,11 +4,12 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.*;
 
 import local_database.RegistersHandler;
-import module_exceptions.PersonNotFoundException;
+import module_exceptions.RegisterExistsException;
 
 public class WindowInfoReg  {
 
@@ -97,7 +98,14 @@ public class WindowInfoReg  {
 		    
         	@Override
 		    public void actionPerformed(ActionEvent e) {
-		    	RegistersHandler reg = new RegistersHandler();
+        		RegistersHandler reg = null;
+        		
+        		try {
+        			reg = new RegistersHandler();
+        		}
+        		catch(Exception exc) {
+        			new WindowError("Não é possível acessar as informações locais!");
+        		}
 		    	
 		    	String[] infos = new String[7];
 		    	infos[0] = name.getText();
@@ -108,15 +116,54 @@ public class WindowInfoReg  {
 		    	infos[5] = birthDate.getText();
 		    	infos[6] = motherName.getText();
 		    	
-		    	try {
-		    		reg.registerNewCase(infos);
-		    		
-		    		//TODO inserir janela de IAI SEU PORRA FUNCIONOU BRIGADO
-		    	}
-		    	catch(Exception exc) {
-		    		//TODO inserir janela de IAI SEU PORRA DEU MERDA CARAI RESOLVE AÍ VALEEEEEEU
+		    	boolean algumCampoVazio = false;
+		    	for(int i = 0; i < infos.length; i++)
+		    	{
+		    		if(infos[i].isEmpty())
+		    		{
+		    			algumCampoVazio = true;
+		    		}
 		    	}
 		    	
+		    	
+		    	if(algumCampoVazio)
+		    	{
+		    		new WindowError("Preencha todos os campos!");
+		    	}
+		    	else
+		    	{
+		    		try {
+			    		reg.registerNewCase(infos);
+			    		
+			    		new WindowSucess("Cadastro realizado com sucesso!");
+			    		janela.setVisible(false);
+			    		janela.dispose();
+			    	}
+		    		catch(IOException ioExc)
+		    		{
+		    			new WindowError("Não é possível acessar as informações locais!");
+		    		}
+			    	catch(RegisterExistsException existExc) {
+			    		JOptionPane op = new JOptionPane();
+		                op.setSize(600, 300);
+		                int input = JOptionPane.showConfirmDialog(null, "Atualizar Cadastro?");
+		                
+		                switch(input) {
+		                    case JOptionPane.OK_OPTION:
+		                        //TODO todones meu caro amigo faça a boa aqui imediatamente amo vc <3 abraço
+		                        break;
+		                    case JOptionPane.CANCEL_OPTION:
+		                        op.setVisible(false);
+		                        break;
+		                    default:
+		                    	op.setVisible(false);
+		                    	janela.setVisible(false);
+		                    	janela.dispose();
+		                    	new WindowMain();
+		                        break;
+		                }
+			    	}
+		    	}
 		    }
 		});
         

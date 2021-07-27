@@ -73,6 +73,7 @@ public class WindowSucess {
 		    public void actionPerformed(ActionEvent e) {
 		    	janela.setVisible(false);
 		    	janela.dispose();
+		    	new WindowMain();
 		    }
 		});
 		contentPane.add(acceptErrorButton);

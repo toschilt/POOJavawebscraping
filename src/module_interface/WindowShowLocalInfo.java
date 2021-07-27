@@ -76,7 +76,7 @@ public class WindowShowLocalInfo
 		contentPane.add(labelValue);
 	}
 	
-	public WindowShowLocalInfo(String infos)
+	public WindowShowLocalInfo(String[] infos)
 	{
 		//TODO ajustar String[] infos
 		janela = new JFrame("Informações de " + infos[0]);
@@ -89,7 +89,7 @@ public class WindowShowLocalInfo
 		
 		
 		//TÍTULO DA JANELA
-		createMainTitleInScreen("Informações de " + userSearched);
+		createMainTitleInScreen("Informações de " + infos[0]);
 		
 		
 		//MOSTRANDO OS VALORES!
@@ -97,30 +97,34 @@ public class WindowShowLocalInfo
 		
 		//PRIMEIRA COLUNA
 		String titleName = "Nome: ";
-		String valueName = userSearched;
+		String valueName = infos[0];
 		createInfoInScreen(titleName, valueName, 1, 1);
 		
 		String titleCPF = "CPF: ";
-		String valueCPF = "";
+		String valueCPF = infos[1];
 		createInfoInScreen(titleCPF, valueCPF, 2, 1);
 		
 		String titleMotherName = "Nome da mãe: ";
-		String valueMotherName = "Andréa Coisa Linda <3";
+		String valueMotherName = infos[6];
 		createInfoInScreen(titleMotherName, valueMotherName, 3, 1);
 		
-		String titleVaccinationDate = "Data da vacinação: ";
-		String valueVaccinationDate = "18/07/2021";
-		createInfoInScreen(titleVaccinationDate, valueVaccinationDate, 4, 1);
+		String titleStatusPerson = "Tipo de caso: ";
+		String valueStatusPerson = infos[3];
+		createInfoInScreen(titleStatusPerson, valueStatusPerson, 4, 1);
 		
 		
 		//SEGUNDA COLUNA
+		String titleGender = "Gênero: ";
+		String valueGender = infos[2];
+		createInfoInScreen(titleGender, valueGender, 1, 2);
+		
 		String titleBirthDate = "Data de nascimento: ";
-		String valueBirthDate = "21/05/2001";
-		createInfoInScreen(titleBirthDate, valueBirthDate, 1, 2);
+		String valueBirthDate = infos[5];
+		createInfoInScreen(titleBirthDate, valueBirthDate, 2, 2);
 		
 		String titleVaccinationGroup = "Grupo de Atendimento: ";
-		String valueVaccinationGroup = "Novinho";
-		createInfoInScreen(titleVaccinationGroup, valueVaccinationGroup, 2, 2);
+		String valueVaccinationGroup = infos[4];
+		createInfoInScreen(titleVaccinationGroup, valueVaccinationGroup, 3, 2);
 		
 		
 		//BOTÕES
@@ -147,7 +151,7 @@ public class WindowShowLocalInfo
 		    public void actionPerformed(ActionEvent e) {
 		    	janela.setVisible(false);
 		    	janela.dispose();
-		    	//TODO abrir nova janela aqui!
+		    	new WindowSearchLocalInfo();
 		    }
 		});
 		contentPane.add(buttonNewSearch);
@@ -159,6 +163,15 @@ public class WindowShowLocalInfo
 	
 	public static void main(String[] args)
 	{
-		new WindowShowLocalInfo("Toschinho");
+		String[] infos = new String[7];
+		infos[0] = "Nome";
+		infos[1] = "CPF";
+		infos[2] = "Gênero";
+		infos[3] = "Status";
+		infos[4] = "Grupo";
+		infos[5] = "Data de nascimento";
+		infos[6] = "Nome da mãe";
+		
+		new WindowShowLocalInfo(infos);
 	}
 }

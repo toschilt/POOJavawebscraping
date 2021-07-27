@@ -57,14 +57,20 @@ public class WindowSearchLocalInfo  {
         buttonSearch.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	RegistersHandler reg = new RegistersHandler();
+		    	RegistersHandler reg = null;
+        		
+        		try {
+        			reg = new RegistersHandler();
+        		}
+        		catch(Exception exc) {
+        			new WindowError("Não é possível acessar as informações locais!");
+        		}
 		    	
 		    	if(!cpf.getText().isEmpty())
 		    	{
 		    		try
 		    		{
-		    			//TODO mudar para String[]
-		    			String infos = reg.searchForCase(cpf.getText());
+		    			String[] infos = reg.searchForCase(cpf.getText());
 		    			
 		    			janela.setVisible(false);
 		    			new WindowShowLocalInfo(infos);
@@ -72,14 +78,28 @@ public class WindowSearchLocalInfo  {
 		    		}
 		    		catch(PersonNotFoundException exc)
 		    		{
-		    			System.out.println("LEGO DA GABIIIIIIIIIIIIIIIIIII");
-		    			//TODO mostra mensagem de DEU MERDA IRMÃO
+		    			new WindowError("Registro não encontrado!");
 		    		}
-		    		
-		    		
 		    	}
-		    		
-		    	
+		    	else if(!name.getText().isEmpty())
+		    	{
+		    		try
+		    		{
+		    			String[] infos = reg.searchForCase(name.getText());
+		    			
+		    			janela.setVisible(false);
+		    			new WindowShowLocalInfo(infos);
+				    	janela.dispose();
+		    		}
+		    		catch(PersonNotFoundException exc)
+		    		{
+		    			new WindowError("Registro não encontrado!");
+		    		}
+		    	}
+		    	else
+		    	{
+		    		new WindowError("Insira pelo menos uma chave de busca!");
+		    	}
 		    }
 		});
         
