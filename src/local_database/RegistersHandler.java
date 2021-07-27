@@ -61,7 +61,7 @@ public class RegistersHandler {
     	return null;
     }
     
-    //Verifica se um usuário já existe com base no nome e CPF
+    //Verifica se um usuário já existe com base no nome e CPF, retornando o índice deste nos registros
     private int userExists(String name, String cpf, boolean index) {
     	for(Register register : registers) {
         	String nextName = register.getPersonalData().getFullName();
@@ -107,11 +107,13 @@ public class RegistersHandler {
     public void updateInformation(String[] updatedData) throws PersonNotFoundException, IOException, CsvException {
         
     	int registerIndex = userExists(updatedData[0], updatedData[1], true);
+    	System.out.println(registerIndex + "");
     	
     	if(registerIndex != -1) {
     		Register registerToUpdate = registers.get(registerIndex);
     		registerToUpdate.update(updatedData);
-    		DataFileHandler.updateDataInExternalFile(registerIndex + 2, updatedData);
+    		DataFileHandler.updateDataInExternalFile(registerIndex, updatedData);
+    		return;
     	}
         
         throw new PersonNotFoundException("Pessoa não encontrada");

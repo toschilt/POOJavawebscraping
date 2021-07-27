@@ -138,9 +138,10 @@ public class WindowInfoReg  {
 		    		try {
 			    		reg.registerNewCase(infos);
 			    		
-			    		new WindowSucess("Cadastro realizado com sucesso!");
 			    		janela.setVisible(false);
 			    		janela.dispose();
+			    		new WindowSucess("Cadastro realizado com sucesso!");
+			    		
 			    	}
 		    		catch(IOException ioExc)
 		    		{
@@ -156,6 +157,9 @@ public class WindowInfoReg  {
 		                    case JOptionPane.OK_OPTION:
 								try {
 									reg.updateInformation(infos);
+									janela.setVisible(false);
+						    		janela.dispose();
+									new WindowSucess("Atualizado com sucesso!");
 								} catch (Exception InfoExc) {
 									new WindowError("Não é possível acessar as informações locais!");
 								}                	
