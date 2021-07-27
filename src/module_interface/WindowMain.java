@@ -11,10 +11,10 @@ public class WindowMain
 	//Janela atual
 	private JFrame janela;
 	
-	//Layout da p�gina
+	//Layout da página
 	private SpringLayout layout;
 	
-	//Componente da p�gina (utilizando somente um para facilitar)
+	//Componente da página (utilizando somente um para facilitar)
 	private Container contentPane;
 	
 	//Tamanho horizontal da janela.
@@ -23,23 +23,23 @@ public class WindowMain
 	//Tamanho vertical da janela.
 	private int ySize = 700;
 	
-	//Offset vertical dos valores em rela��o � janela.
+	//Offset vertical dos valores em relação à janela.
 	private int verticalWindowOffsetValues = 175;
 	
-	//Offset vertical entre bot�es.
+	//Offset vertical entre botões.
 	private int verticalButtonOffsetValues = 120;
 	
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
 	
-	//Tamanho da fonte do t�tulo principal.
+	//Tamanho da fonte do título principal.
 	private int sizeMainTitleFont = 50;
 	
-	//Tamanho da fonte do texto dos bot�es.
+	//Tamanho da fonte do texto dos botões.
 	private int sizeButtonFont = 25;
 	
 	/*
-	 * Cria o t�tulo principal na tela.
+	 * Cria o título principal na tela.
 	 */
 	private void createMainTitleInScreen()
 	{
@@ -61,10 +61,10 @@ public class WindowMain
 		this.layout = new SpringLayout();
 		
 		
-		//T�TULO DA JANELA
+		//TÍTULO DA JANELA
 		createMainTitleInScreen();
 		
-		//BOT�ES
+		//BOTÕES
 		JButton buttonInfoRegister = new JButton("Cadastrar informações");
 		buttonInfoRegister.setFont(new Font(font, Font.BOLD, sizeButtonFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonInfoRegister, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);

@@ -31,7 +31,7 @@ public class RegistersHandler {
 
     //Construtor
     public RegistersHandler() throws CannotCreateDataFileException {
-    	//Inicializa��o do arquivo
+    	//Inicialização do arquivo
     	try { registers = DataFileHandler.loadDataFromExternalFile(); }
 	    catch(Exception e) {
 	    	//Arquivo de dados não existe

@@ -51,7 +51,7 @@ public class WindowSearchLocalInfo  {
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, cpf, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
         layout.putConstraint(SpringLayout.NORTH, cpf, 165 + 120 + 20, SpringLayout.NORTH, contentPane);
         
-        // bot�es
+        // botões
         buttonSearch.setFont(new Font("Arial", Font.BOLD, 25));
         buttonSearch.addActionListener(new ActionListener() {
 		    @Override

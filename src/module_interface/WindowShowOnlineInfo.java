@@ -67,7 +67,7 @@ public class WindowShowOnlineInfo  {
 		contentPane.add(subTitulo);
 		
         
-        // bot�es
+        // botões
         buttonVac.setFont(new Font("Arial", Font.BOLD, 25));
         buttonCases.setFont(new Font("Arial", Font.BOLD, 25));
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonVac, -200, SpringLayout.HORIZONTAL_CENTER, contentPane);

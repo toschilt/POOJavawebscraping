@@ -92,7 +92,7 @@ public class WindowInfoReg  {
         layout.putConstraint(SpringLayout.WEST, motherName, 100, SpringLayout.WEST, contentPane);
         layout.putConstraint(SpringLayout.NORTH, motherName, 165 + 180 + 20, SpringLayout.NORTH, contentPane);
         
-        // bot�es
+        // botões
         buttonReg.setFont(new Font("Arial", Font.BOLD, 25));
         buttonReg.addActionListener(new ActionListener() {
 		    
@@ -258,7 +258,7 @@ public class WindowInfoReg  {
         if(length != 11)
         	return false;
         try {
-            long parse = Long.parseLong(cpf);
+            Long.parseLong(cpf);
         }
         catch(Exception e) {
         	return false;

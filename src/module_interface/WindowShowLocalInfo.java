@@ -11,10 +11,10 @@ public class WindowShowLocalInfo
 	//Janela atual
 	private JFrame janela;
 	
-	//Layout da p�gina
+	//Layout da página
 	private SpringLayout layout;
 	
-	//Componente da p�gina (utilizando somente um para facilitar)
+	//Componente da página (utilizando somente um para facilitar)
 	private Container contentPane;
 	
 	//Tamanho horizontal da janela.
@@ -26,25 +26,25 @@ public class WindowShowLocalInfo
 	//Offset horizontal entre os valores da primeira e da segunda coluna.
 	private int horizontalDataOffsetValues = 500;
 	
-	//Offset vertical entre informa��es de uma linha para outra.
+	//Offset vertical entre informações de uma linha para outra.
 	private int vericalDataOffsetValues = 60;
 	
-	//Offset horizontal dos valores em rela��o ao lado esquerdo da janela.
+	//Offset horizontal dos valores em relação ao lado esquerdo da janela.
 	private int horizontalWindowOffsetValues = 165;
 	
-	//Offset vertical dos valores em rela��o � janela.
+	//Offset vertical dos valores em relação à janela.
 	private int verticalWindowOffsetValues = 250;
 	
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
 	
-	//Tamanho da fonte do t�tulo principal.
+	//Tamanho da fonte do título principal.
 	private int sizeMainTitleFont = 50;
 	
 	//Tamanho da fonte dos valores apresentados na tela.
 	private int sizeValueFont = 20;
 	
-	//Tamanho da fonte do texto dos bot�es.
+	//Tamanho da fonte do texto dos botões.
 	private int sizeButtonFont = 25;
 	
 	
@@ -58,8 +58,8 @@ public class WindowShowLocalInfo
 	}
 	
 	/*
-	 * Cria na tela o t�tulo da informa��o buscada e o seu correspondente valor
-	 * levando em considera��o a linha e a coluna desejada.
+	 * Cria na tela o título da informação buscada e o seu correspondente valor
+	 * levando em consideração a linha e a coluna desejada.
 	 */
 	private void createInfoInScreen(String title, String value, int linha, int coluna)
 	{
@@ -78,7 +78,6 @@ public class WindowShowLocalInfo
 	
 	public WindowShowLocalInfo(String[] infos)
 	{
-		//TODO ajustar String[] infos
 		janela = new JFrame("Informações de " + infos[0]);
 		
 		janela.setSize(xSize, ySize);
@@ -88,12 +87,11 @@ public class WindowShowLocalInfo
 		this.layout = new SpringLayout();
 		
 		
-		//T�TULO DA JANELA
+		//TÍTULO DA JANELA
 		createMainTitleInScreen("Informações de " + infos[0]);
 		
 		
 		//MOSTRANDO OS VALORES!
-		//TODO Mudar para obter valores do registro local
 		
 		//PRIMEIRA COLUNA
 		String titleName = "Nome: ";
@@ -127,7 +125,7 @@ public class WindowShowLocalInfo
 		createInfoInScreen(titleVaccinationGroup, valueVaccinationGroup, 3, 2);
 		
 		
-		//BOT�ES
+		//BOTÕES
 		JButton buttonMainMenu = new JButton("Voltar ao menu principal");
 		buttonMainMenu.setFont(new Font(font, Font.BOLD, sizeButtonFont));
 		layout.putConstraint(SpringLayout.EAST, buttonMainMenu, -50, SpringLayout.EAST, contentPane);

@@ -15,10 +15,10 @@ public class WindowSucess {
 	//Janela atual
 	private JFrame janela;
 	
-	//Layout da p·gina
+	//Layout da p√°gina
 	private SpringLayout layout;
 	
-	//Componente da p·gina (utilizando somente um para facilitar)
+	//Componente da p√°gina (utilizando somente um para facilitar)
 	private Container contentPane;
 	
 	//Tamanho horizontal da janela.
@@ -30,13 +30,13 @@ public class WindowSucess {
 	//Fonte de todos os textos da tela.
 	private String font = "Arial";
 	
-	//Tamanho da fonte do tÌtulo principal.
+	//Tamanho da fonte do t√≠tulo principal.
 	private int sizeMainTitleFont = 40;
 	
-	//Tamanho da fonte da descriÁ„o do erro
+	//Tamanho da fonte da descri√ß√£o do erro
 	private int sizeDescriptionTextFont = 20;
 	
-	//Tamanho da fonte do texto dos botıes.
+	//Tamanho da fonte do texto dos bot√µes.
 	private int sizeButtonFont = 25;
 	
 	public WindowSucess(String sucessDescription)
@@ -49,21 +49,21 @@ public class WindowSucess {
 		this.contentPane = janela.getContentPane();
 		this.layout = new SpringLayout();
 		
-		//TÕTULO DA JANELA
+		//T√çTULO DA JANELA
 		JLabel labelTitulo = new JLabel("Sucesso!");
 		labelTitulo.setFont(new Font(font, Font.BOLD, sizeMainTitleFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelTitulo, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelTitulo, 25, SpringLayout.NORTH, contentPane);
 		contentPane.add(labelTitulo);
 		
-		//DESCRI«√O DO ERRO
+		//DESCRI√á√ÉO DO ERRO
 		JLabel labelErrorDescription = new JLabel(sucessDescription);
 		labelErrorDescription.setFont(new Font(font, Font.PLAIN, sizeDescriptionTextFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, labelErrorDescription, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
 		layout.putConstraint(SpringLayout.NORTH, labelErrorDescription, 70, SpringLayout.NORTH, labelTitulo);
 		contentPane.add(labelErrorDescription);
 		
-		//BOT’ES
+		//BOT√ïES
 		JButton acceptErrorButton = new JButton("Fechar");
 		acceptErrorButton.setFont(new Font(font, Font.BOLD, sizeButtonFont));
 		layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, acceptErrorButton, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
